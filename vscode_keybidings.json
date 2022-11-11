@@ -64,6 +64,14 @@
         "key": "alt+i",
         "command": "editor.action.insertLineBefore",
         "when": "editorTextFocus"
+    },{
+        "key": "alt+m",
+        "command": "cursorLineEnd",
+        "when": "editorTextFocus"
+    },{
+        "key": "alt+n",
+        "command": "cursorLineStart",
+        "when": "editorTextFocus"
     },
     // Utils
     {

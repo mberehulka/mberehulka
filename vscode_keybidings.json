@@ -52,10 +52,26 @@
         "command": "cursorDown",
     },{
         "key": "alt+e",
-        "command": "cursorPageUp",
+        "command": "deleteRight",
+    },{
+        "key": "shift+alt+e",
+        "command": "deleteWordRight",
+        "when": "editorTextFocus"
+    },{
+        "key": "shift+alt+q",
+        "command": "deleteWordLeft",
+        "when": "editorTextFocus"
     },{
         "key": "alt+q",
+        "command": "deleteLeft",
+    },{
+        "key": "alt+r",
+        "command": "cursorPageUp",
+        "when": "editorTextFocus"
+    },{
+        "key": "alt+f",
         "command": "cursorPageDown",
+        "when": "editorTextFocus"
     },{
         "key": "alt+k",
         "command": "editor.action.insertLineAfter",
@@ -71,6 +87,14 @@
     },{
         "key": "alt+n",
         "command": "cursorLineStart",
+        "when": "editorTextFocus"
+    },{
+        "key": "shift+alt+d",
+        "command": "cursorWordRight",
+        "when": "editorTextFocus"
+    },{
+        "key": "shift+alt+a",
+        "command": "cursorWordLeft",
         "when": "editorTextFocus"
     },
     // Utils

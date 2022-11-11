@@ -1,0 +1,73 @@
+[
+    // Terminal
+    {
+        "key": "f2",
+        "command": "workbench.action.tasks.runTask",
+        "args": "A"
+    },
+    {
+        "key": "f3",
+        "command": "workbench.action.tasks.runTask",
+        "args": "B"
+    },
+    {
+        "key": "f4",
+        "command": "workbench.action.tasks.runTask",
+        "args": "C"
+    },
+    {
+        "key": "f5",
+        "command": "workbench.action.tasks.runTask",
+        "args": "D"
+    },{
+        "key": "alt+oem_3",
+        "command": "workbench.action.terminal.killAll",
+    },
+    // Git
+    {
+        "key": "numpad_add",
+        "command": "git.branch",
+    },{
+        "key": "numpad_divide",
+        "command": "git.fetchAll",
+    },{
+        "key": "numpad_multiply",
+        "command": "git.commit",
+    },{
+        "key": "numpad_subtract",
+        "command": "git.push",
+    },
+    // Movement
+    {
+        "key": "alt+a",
+        "command": "cursorLeft",
+    },{
+        "key": "alt+d",
+        "command": "cursorRight",
+    },{
+        "key": "alt+w",
+        "command": "cursorUp",
+    },{
+        "key": "alt+s",
+        "command": "cursorDown",
+    },{
+        "key": "alt+e",
+        "command": "cursorPageUp",
+    },{
+        "key": "alt+q",
+        "command": "cursorPageDown",
+    },{
+        "key": "alt+k",
+        "command": "editor.action.insertLineAfter",
+        "when": "editorTextFocus"
+    },{
+        "key": "alt+i",
+        "command": "editor.action.insertLineBefore",
+        "when": "editorTextFocus"
+    },
+    // Utils
+    {
+        "key": "alt+c",
+        "command": "editor.action.commentLine",
+    }
+]

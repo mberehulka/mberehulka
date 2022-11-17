@@ -1,24 +1,19 @@
 [
     // Terminal
     {
-        "key": "f2",
+        "key": "f3",
         "command": "workbench.action.tasks.runTask",
         "args": "A"
     },
     {
-        "key": "f3",
+        "key": "f4",
         "command": "workbench.action.tasks.runTask",
         "args": "B"
     },
     {
-        "key": "f4",
-        "command": "workbench.action.tasks.runTask",
-        "args": "C"
-    },
-    {
         "key": "f5",
         "command": "workbench.action.tasks.runTask",
-        "args": "D"
+        "args": "C"
     },{
         "key": "alt+oem_3",
         "command": "workbench.action.terminal.killAll",
@@ -86,7 +81,7 @@
         "when": "editorTextFocus"
     },{
         "key": "alt+n",
-        "command": "cursorLineStart",
+        "command": "cursorHome",
         "when": "editorTextFocus"
     },{
         "key": "shift+alt+d",

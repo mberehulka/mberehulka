@@ -14,7 +14,8 @@
         "key": "f5",
         "command": "workbench.action.tasks.runTask",
         "args": "C"
-    },{
+    },
+    {
         "key": "alt+oem_3",
         "command": "workbench.action.terminal.killAll",
     },
@@ -22,13 +23,16 @@
     {
         "key": "numpad_add",
         "command": "git.branch",
-    },{
+    },
+    {
         "key": "numpad_divide",
         "command": "git.fetchAll",
-    },{
+    },
+    {
         "key": "numpad_multiply",
         "command": "git.commit",
-    },{
+    },
+    {
         "key": "numpad_subtract",
         "command": "git.push",
     },
@@ -36,65 +40,121 @@
     {
         "key": "alt+a",
         "command": "cursorLeft",
-    },{
+    },
+    {
         "key": "alt+d",
         "command": "cursorRight",
-    },{
+    },
+    {
         "key": "alt+w",
         "command": "cursorUp",
-    },{
+    },
+    {
         "key": "alt+s",
         "command": "cursorDown",
-    },{
+    },
+    {
         "key": "alt+e",
         "command": "deleteRight",
-    },{
+    },
+    {
         "key": "shift+alt+e",
         "command": "deleteWordRight",
         "when": "editorTextFocus"
-    },{
+    },
+    {
         "key": "shift+alt+q",
         "command": "deleteWordLeft",
         "when": "editorTextFocus"
-    },{
+    },
+    {
         "key": "alt+q",
         "command": "deleteLeft",
-    },{
-        "key": "alt+r",
-        "command": "cursorPageUp",
-        "when": "editorTextFocus"
-    },{
-        "key": "alt+f",
+    },
+    {
+        "key": "alt+v",
         "command": "cursorPageDown",
         "when": "editorTextFocus"
-    },{
+    },
+    {
         "key": "alt+k",
         "command": "editor.action.insertLineAfter",
         "when": "editorTextFocus"
-    },{
+    },
+    {
         "key": "alt+i",
         "command": "editor.action.insertLineBefore",
         "when": "editorTextFocus"
-    },{
+    },
+    {
         "key": "alt+m",
         "command": "cursorLineEnd",
         "when": "editorTextFocus"
-    },{
+    },
+    {
         "key": "alt+n",
         "command": "cursorHome",
         "when": "editorTextFocus"
-    },{
+    },
+    {
         "key": "shift+alt+d",
         "command": "cursorWordRight",
         "when": "editorTextFocus"
-    },{
+    },
+    {
         "key": "shift+alt+a",
         "command": "cursorWordLeft",
+        "when": "editorTextFocus"
+    },
+    {
+        "key": "alt+x",
+        "command": "workbench.action.gotoLine",
         "when": "editorTextFocus"
     },
     // Utils
     {
         "key": "alt+c",
         "command": "editor.action.commentLine",
-    }
+    },
+    {
+        "key": "alt+f",
+        "command": "workbench.action.focusActiveEditorGroup",
+        "when": "filesExplorerFocus"
+    },
+    {
+        "key": "alt+f",
+        "command": "workbench.files.action.focusFilesExplorer",
+        "when": "editorFocus"
+    },
+    //select
+    {
+        "key": "alt+j",
+        "command": "cursorLeftSelect",
+        "when": "editorFocus"
+    },
+    {
+        "key": "alt+shift+j",
+        "command": "cursorWordLeftSelect",
+        "when": "editorFocus"
+    },
+    {
+        "key": "alt+l",
+        "command": "cursorRightSelect",
+        "when": "editorFocus"
+    },
+    {
+        "key": "alt+shift+l",
+        "command": "cursorWordRightSelect",
+        "when": "editorFocus"
+    },
+    {
+        "key": "alt+u",
+        "command": "cursorUpSelect",
+        "when": "editorFocus"
+    },
+    {
+        "key": "alt+o",
+        "command": "cursorDownSelect",
+        "when": "editorFocus"
+    },
 ]

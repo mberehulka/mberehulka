@@ -157,4 +157,14 @@
         "command": "cursorDownSelect",
         "when": "editorFocus"
     },
+    {
+        "key": "alt+shift+n",
+        "command": "cursorHomeSelect",
+        "when": "editorFocus"
+    },
+    {
+        "key": "alt+shift+m",
+        "command": "cursorLineEndSelect",
+        "when": "editorFocus"
+    },
 ]

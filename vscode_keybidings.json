@@ -148,12 +148,12 @@
         "when": "editorFocus"
     },
     {
-        "key": "alt+u",
+        "key": "alt+shift+i",
         "command": "cursorUpSelect",
         "when": "editorFocus"
     },
     {
-        "key": "alt+o",
+        "key": "alt+shift+k",
         "command": "cursorDownSelect",
         "when": "editorFocus"
     },

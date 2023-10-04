@@ -16,8 +16,12 @@
         "args": "C"
     },
     {
-        "key": "alt+oem_3",
+        "key": "alt+shift+c",
         "command": "workbench.action.terminal.killAll",
+    },
+    {
+        "key": "alt+;",
+        "command": "workbench.action.terminal.new",
     },
     // Git
     {
@@ -52,6 +56,17 @@
     {
         "key": "alt+s",
         "command": "cursorDown",
+    },
+    
+    {
+        "key": "alt+shift+w",
+        "command": "cursorMove",
+        "args": { "to": "up", "by": "line", "value": 3 }
+    },
+    {
+        "key": "alt+shift+s",
+        "command": "cursorMove",
+        "args": { "to": "down", "by": "line", "value": 3 }
     },
     {
         "key": "alt+e",
@@ -116,6 +131,7 @@
         "key": "alt+c",
         "command": "editor.action.commentLine",
     },
+    // View
     {
         "key": "alt+f",
         "command": "workbench.action.focusActiveEditorGroup",
@@ -125,6 +141,15 @@
         "key": "alt+f",
         "command": "workbench.files.action.focusFilesExplorer",
         "when": "editorFocus"
+    },
+    {
+        "key": "alt+f",
+        "command": "workbench.action.focusActiveEditorGroup",
+        "when": "terminalFocus"
+    },
+    {
+        "key": "alt+t",
+        "command": "workbench.action.terminal.focus"
     },
     //select
     {

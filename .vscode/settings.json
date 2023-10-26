@@ -1,6 +1,5 @@
 {
   "deno.enable": true,
-  "deno.lint": true,
   "editor.defaultFormatter": "denoland.vscode-deno",
   "[typescriptreact]": {
     "editor.defaultFormatter": "denoland.vscode-deno"
@@ -14,5 +13,11 @@
   "[javascript]": {
     "editor.defaultFormatter": "denoland.vscode-deno"
   },
-  "editor.tabSize": 2
+  "editor.tabSize": 2,
+  "[xml]": {
+    "editor.defaultFormatter": "redhat.vscode-xml"
+  },
+  "[css]": {
+    "editor.defaultFormatter": "vscode.css-language-features"
+  }
 }

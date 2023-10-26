@@ -1,5 +1,6 @@
 import { AppProps } from "$fresh/server.ts"
-import { Partial } from "$fresh/runtime.ts"
+import Counter from "../islands/empty.tsx"
+import Header from "../components/header.tsx"
 
 export default function App({ Component }: AppProps) {
 	return (
@@ -7,12 +8,13 @@ export default function App({ Component }: AppProps) {
 			<head>
 				<meta charset="utf-8" />
 				<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-				<title>Muriel Guedes</title>
+				<title>Muriel Berehulka</title>
+				<link rel="stylesheet" href="css/main.css" />
 			</head>
-			<body f-client-nav>
-				<Partial name="body">
-					<Component />
-				</Partial>
+			<body class="bg-black text-white">
+				<Counter />
+				<Header />
+				<Component />
 			</body>
 		</html>
 	)

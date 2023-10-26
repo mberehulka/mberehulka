@@ -1,8 +1,8 @@
 {
   "lock": false,
-  "tasks": {
+  "_tasks": {
     "check": "deno fmt --check && deno lint && deno check **/*.ts && deno check **/*.tsx",
-    "start": "deno run -A --watch=static/,routes/ src/dev.ts",
+    "start": "deno run -A --watch=static/,src/ src/dev.ts",
     "build": "deno run -A src/dev.ts build",
     "preview": "deno run -A src/main.ts",
     "update": "deno run -A -r https://fresh.deno.dev/update ."
@@ -16,7 +16,9 @@
     "@preact/signals-core": "https://esm.sh/*@preact/signals-core@1.5.0",
     "twind": "https://esm.sh/twind@0.16.19",
     "twind/": "https://esm.sh/twind@0.16.19/",
-    "$std/": "https://deno.land/std@0.193.0/"
+    "$std/": "https://deno.land/std@0.193.0/",
+    "$x/": "https://deno.land/x/",
+    "$gfm": "https://deno.land/x/gfm@0.2.5/mod.ts"
   },
   "compilerOptions": {
     "jsx": "react-jsx",

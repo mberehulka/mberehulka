@@ -3,12 +3,24 @@
   "tasks": [
     {
       "label": "A",
-      "command": "deno fmt; deno task start",
+      "command": "Start-Process ./.vscode/start.sh",
       "type": "shell",
       "presentation": {
-        "reveal": "always",
+        "reveal": "silent",
         "clear": true,
-        "panel": "shared"
+        "panel": "shared",
+        "close": true
+      }
+    },
+    {
+      "label": "B",
+      "command": "deno fmt",
+      "type": "shell",
+      "presentation": {
+        "reveal": "silent",
+        "clear": true,
+        "panel": "shared",
+        "close": true
       }
     }
   ]

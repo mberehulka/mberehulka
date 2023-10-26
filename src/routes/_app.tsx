@@ -1,6 +1,7 @@
 import { AppProps } from "$fresh/server.ts"
 import Counter from "../islands/empty.tsx"
 import Header from "../components/header.tsx"
+import Footer from "../components/footer.tsx"
 
 export default function App({ Component }: AppProps) {
 	return (
@@ -15,6 +16,7 @@ export default function App({ Component }: AppProps) {
 				<Counter />
 				<Header />
 				<Component />
+				<Footer />
 			</body>
 		</html>
 	)

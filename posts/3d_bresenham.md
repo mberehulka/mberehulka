@@ -7,7 +7,7 @@ snippet: 3D Bresenham algorithm with running example
 <div class="horizontal">
   <canvas id="ctx" class="full-width" height="400">test</canvas>
 </div>
-<script src="js/3d_bresenham.js" type="module"></script>
+<script src="js/3d/bresenham.js" type="module"></script>
 
 > Move camera with WASD and rotate with IJKL, or click and move mouse
 

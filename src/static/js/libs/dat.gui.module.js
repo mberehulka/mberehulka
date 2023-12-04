@@ -19,7 +19,7 @@ function ___$insertStyle(css) {
     return;
   }
 
-  var style = document.createElement('style');
+  const style = document.createElement('style');
 
   style.setAttribute('type', 'text/css');
   style.innerHTML = css;
@@ -29,16 +29,16 @@ function ___$insertStyle(css) {
 }
 
 function colorToString (color, forceCSSHex) {
-  var colorFormat = color.__state.conversionName.toString();
-  var r = Math.round(color.r);
-  var g = Math.round(color.g);
-  var b = Math.round(color.b);
-  var a = color.a;
-  var h = Math.round(color.h);
-  var s = color.s.toFixed(1);
-  var v = color.v.toFixed(1);
+  const colorFormat = color.__state.conversionName.toString();
+  const r = Math.round(color.r);
+  const g = Math.round(color.g);
+  const b = Math.round(color.b);
+  const a = color.a;
+  const h = Math.round(color.h);
+  const s = color.s.toFixed(1);
+  const v = color.v.toFixed(1);
   if (forceCSSHex || colorFormat === 'THREE_CHAR_HEX' || colorFormat === 'SIX_CHAR_HEX') {
-    var str = color.hex.toString(16);
+    let str = color.hex.toString(16);
     while (str.length < 6) {
       str = '0' + str;
     }
@@ -65,13 +65,13 @@ function colorToString (color, forceCSSHex) {
   return 'unknown format';
 }
 
-var ARR_EACH = Array.prototype.forEach;
-var ARR_SLICE = Array.prototype.slice;
-var Common = {
+const ARR_EACH = Array.prototype.forEach;
+const ARR_SLICE = Array.prototype.slice;
+const Common = {
   BREAK: {},
   extend: function extend(target) {
     this.each(ARR_SLICE.call(arguments, 1), function (obj) {
-      var keys = this.isObject(obj) ? Object.keys(obj) : [];
+      const keys = this.isObject(obj) ? Object.keys(obj) : [];
       keys.forEach(function (key) {
         if (!this.isUndefined(obj[key])) {
           target[key] = obj[key];
@@ -82,7 +82,7 @@ var Common = {
   },
   defaults: function defaults(target) {
     this.each(ARR_SLICE.call(arguments, 1), function (obj) {
-      var keys = this.isObject(obj) ? Object.keys(obj) : [];
+      const keys = this.isObject(obj) ? Object.keys(obj) : [];
       keys.forEach(function (key) {
         if (this.isUndefined(target[key])) {
           target[key] = obj[key];
@@ -92,10 +92,10 @@ var Common = {
     return target;
   },
   compose: function compose() {
-    var toCall = ARR_SLICE.call(arguments);
+    const toCall = ARR_SLICE.call(arguments);
     return function () {
-      var args = ARR_SLICE.call(arguments);
-      for (var i = toCall.length - 1; i >= 0; i--) {
+      let args = ARR_SLICE.call(arguments);
+      for (let i = toCall.length - 1; i >= 0; i--) {
         args = [toCall[i].apply(this, args)];
       }
       return args[0];
@@ -108,15 +108,15 @@ var Common = {
     if (ARR_EACH && obj.forEach && obj.forEach === ARR_EACH) {
       obj.forEach(itr, scope);
     } else if (obj.length === obj.length + 0) {
-      var key = void 0;
-      var l = void 0;
+      let key = void 0;
+      let l = void 0;
       for (key = 0, l = obj.length; key < l; key++) {
         if (key in obj && itr.call(scope, obj[key], key) === this.BREAK) {
           return;
         }
       }
     } else {
-      for (var _key in obj) {
+      for (const _key in obj) {
         if (itr.call(scope, obj[_key], _key) === this.BREAK) {
           return;
         }
@@ -127,19 +127,18 @@ var Common = {
     setTimeout(fnc, 0);
   },
   debounce: function debounce(func, threshold, callImmediately) {
-    var timeout = void 0;
+    let timeout = void 0;
     return function () {
-      var obj = this;
-      var args = arguments;
+      const args = arguments;
       function delayed() {
         timeout = null;
-        if (!callImmediately) func.apply(obj, args);
+        if (!callImmediately) func.apply(this, args);
       }
-      var callNow = callImmediately || !timeout;
+      const callNow = callImmediately || !timeout;
       clearTimeout(timeout);
       timeout = setTimeout(delayed, threshold);
       if (callNow) {
-        func.apply(obj, args);
+        func.apply(this, args);
       }
     };
   },
@@ -184,13 +183,13 @@ var Common = {
   }
 };
 
-var INTERPRETATIONS = [
+const INTERPRETATIONS = [
 {
   litmus: Common.isString,
   conversions: {
     THREE_CHAR_HEX: {
       read: function read(original) {
-        var test = original.match(/^#([A-F0-9])([A-F0-9])([A-F0-9])$/i);
+        const test = original.match(/^#([A-F0-9])([A-F0-9])([A-F0-9])$/i);
         if (test === null) {
           return false;
         }
@@ -203,7 +202,7 @@ var INTERPRETATIONS = [
     },
     SIX_CHAR_HEX: {
       read: function read(original) {
-        var test = original.match(/^#([A-F0-9]{6})$/i);
+        const test = original.match(/^#([A-F0-9]{6})$/i);
         if (test === null) {
           return false;
         }
@@ -216,7 +215,7 @@ var INTERPRETATIONS = [
     },
     CSS_RGB: {
       read: function read(original) {
-        var test = original.match(/^rgb\(\s*(\S+)\s*,\s*(\S+)\s*,\s*(\S+)\s*\)/);
+        const test = original.match(/^rgb\(\s*(\S+)\s*,\s*(\S+)\s*,\s*(\S+)\s*\)/);
         if (test === null) {
           return false;
         }
@@ -231,7 +230,7 @@ var INTERPRETATIONS = [
     },
     CSS_RGBA: {
       read: function read(original) {
-        var test = original.match(/^rgba\(\s*(\S+)\s*,\s*(\S+)\s*,\s*(\S+)\s*,\s*(\S+)\s*\)/);
+        const test = original.match(/^rgba\(\s*(\S+)\s*,\s*(\S+)\s*,\s*(\S+)\s*,\s*(\S+)\s*\)/);
         if (test === null) {
           return false;
         }
@@ -389,11 +388,11 @@ var INTERPRETATIONS = [
     }
   }
 }];
-var result = void 0;
-var toReturn = void 0;
-var interpret = function interpret() {
+let result = void 0;
+let toReturn = void 0;
+const interpret = function interpret() {
   toReturn = false;
-  var original = arguments.length > 1 ? Common.toArray(arguments) : arguments[0];
+  const original = arguments.length > 1 ? Common.toArray(arguments) : arguments[0];
   Common.each(INTERPRETATIONS, function (family) {
     if (family.litmus(original)) {
       Common.each(family.conversions, function (conversion, conversionName) {
@@ -411,15 +410,15 @@ var interpret = function interpret() {
   return toReturn;
 };
 
-var tmpComponent = void 0;
-var ColorMath = {
+let tmpComponent = void 0;
+const ColorMath = {
   hsv_to_rgb: function hsv_to_rgb(h, s, v) {
-    var hi = Math.floor(h / 60) % 6;
-    var f = h / 60 - Math.floor(h / 60);
-    var p = v * (1.0 - s);
-    var q = v * (1.0 - f * s);
-    var t = v * (1.0 - (1.0 - f) * s);
-    var c = [[v, t, p], [q, v, p], [p, v, t], [p, q, v], [t, p, v], [v, p, q]][hi];
+    const hi = Math.floor(h / 60) % 6;
+    const f = h / 60 - Math.floor(h / 60);
+    const p = v * (1.0 - s);
+    const q = v * (1.0 - f * s);
+    const t = v * (1.0 - (1.0 - f) * s);
+    const c = [[v, t, p], [q, v, p], [p, v, t], [p, q, v], [t, p, v], [v, p, q]][hi];
     return {
       r: c[0] * 255,
       g: c[1] * 255,
@@ -427,11 +426,11 @@ var ColorMath = {
     };
   },
   rgb_to_hsv: function rgb_to_hsv(r, g, b) {
-    var min = Math.min(r, g, b);
-    var max = Math.max(r, g, b);
-    var delta = max - min;
-    var h = void 0;
-    var s = void 0;
+    const min = Math.min(r, g, b);
+    const max = Math.max(r, g, b);
+    const delta = max - min;
+    let h = void 0;
+    let s = void 0;
     if (max !== 0) {
       s = delta / max;
     } else {
@@ -459,7 +458,7 @@ var ColorMath = {
     };
   },
   rgb_to_hex: function rgb_to_hex(r, g, b) {
-    var hex = this.hex_with_component(0, 2, r);
+    let hex = this.hex_with_component(0, 2, r);
     hex = this.hex_with_component(hex, 1, g);
     hex = this.hex_with_component(hex, 0, b);
     return hex;
@@ -472,7 +471,7 @@ var ColorMath = {
   }
 };
 
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) {
+const _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) {
   return typeof obj;
 } : function (obj) {
   return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj;
@@ -488,16 +487,16 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 
 
 
-var classCallCheck = function (instance, Constructor) {
+const classCallCheck = function (instance, Constructor) {
   if (!(instance instanceof Constructor)) {
     throw new TypeError("Cannot call a class as a function");
   }
 };
 
-var createClass = function () {
+const createClass = function () {
   function defineProperties(target, props) {
-    for (var i = 0; i < props.length; i++) {
-      var descriptor = props[i];
+    for (let i = 0; i < props.length; i++) {
+      const descriptor = props[i];
       descriptor.enumerable = descriptor.enumerable || false;
       descriptor.configurable = true;
       if ("value" in descriptor) descriptor.writable = true;
@@ -518,12 +517,12 @@ var createClass = function () {
 
 
 
-var get = function get(object, property, receiver) {
+const get = function get(object, property, receiver) {
   if (object === null) object = Function.prototype;
-  var desc = Object.getOwnPropertyDescriptor(object, property);
+  const desc = Object.getOwnPropertyDescriptor(object, property);
 
   if (desc === undefined) {
-    var parent = Object.getPrototypeOf(object);
+    const parent = Object.getPrototypeOf(object);
 
     if (parent === null) {
       return undefined;
@@ -533,7 +532,7 @@ var get = function get(object, property, receiver) {
   } else if ("value" in desc) {
     return desc.value;
   } else {
-    var getter = desc.get;
+    const getter = desc.get;
 
     if (getter === undefined) {
       return undefined;
@@ -543,7 +542,7 @@ var get = function get(object, property, receiver) {
   }
 };
 
-var inherits = function (subClass, superClass) {
+const inherits = function (subClass, superClass) {
   if (typeof superClass !== "function" && superClass !== null) {
     throw new TypeError("Super expression must either be null or a function, not " + typeof superClass);
   }
@@ -569,7 +568,7 @@ var inherits = function (subClass, superClass) {
 
 
 
-var possibleConstructorReturn = function (self, call) {
+const possibleConstructorReturn = function (self, call) {
   if (!self) {
     throw new ReferenceError("this hasn't been initialised - super() hasn't been called");
   }
@@ -577,7 +576,7 @@ var possibleConstructorReturn = function (self, call) {
   return call && (typeof call === "object" || typeof call === "function") ? call : self;
 };
 
-var Color = function () {
+const Color = function () {
   function Color() {
     classCallCheck(this, Color);
     this.__state = interpret.apply(this, arguments);
@@ -650,7 +649,7 @@ Color.recalculateRGB = function (color, component, componentHexIndex) {
   }
 };
 Color.recalculateHSV = function (color) {
-  var result = ColorMath.rgb_to_hsv(color.r, color.g, color.b);
+  const result = ColorMath.rgb_to_hsv(color.r, color.g, color.b);
   Common.extend(color.__state, {
     s: result.s,
     v: result.v
@@ -690,7 +689,7 @@ Object.defineProperty(Color.prototype, 'hex', {
   }
 });
 
-var Controller = function () {
+const Controller = function () {
   function Controller(object, property) {
     classCallCheck(this, Controller);
     this.initialValue = object[property];
@@ -741,29 +740,29 @@ var Controller = function () {
   return Controller;
 }();
 
-var EVENT_MAP = {
+const EVENT_MAP = {
   HTMLEvents: ['change'],
   MouseEvents: ['click', 'mousemove', 'mousedown', 'mouseup', 'mouseover'],
   KeyboardEvents: ['keydown']
 };
-var EVENT_MAP_INV = {};
+const EVENT_MAP_INV = {};
 Common.each(EVENT_MAP, function (v, k) {
   Common.each(v, function (e) {
     EVENT_MAP_INV[e] = k;
   });
 });
-var CSS_VALUE_PIXELS = /(\d+(\.\d+)?)px/;
+const CSS_VALUE_PIXELS = /(\d+(\.\d+)?)px/;
 function cssValueToPixels(val) {
   if (val === '0' || Common.isUndefined(val)) {
     return 0;
   }
-  var match = val.match(CSS_VALUE_PIXELS);
+  const match = val.match(CSS_VALUE_PIXELS);
   if (!Common.isNull(match)) {
     return parseFloat(match[1]);
   }
   return 0;
 }
-var dom = {
+const dom = {
   makeSelectable: function makeSelectable(elem, selectable) {
     if (elem === undefined || elem.style === undefined) return;
     elem.onselectstart = selectable ? function () {
@@ -774,8 +773,8 @@ var dom = {
     elem.unselectable = selectable ? 'on' : 'off';
   },
   makeFullscreen: function makeFullscreen(elem, hor, vert) {
-    var vertical = vert;
-    var horizontal = hor;
+    let vertical = vert;
+    let horizontal = hor;
     if (Common.isUndefined(horizontal)) {
       horizontal = true;
     }
@@ -793,17 +792,17 @@ var dom = {
     }
   },
   fakeEvent: function fakeEvent(elem, eventType, pars, aux) {
-    var params = pars || {};
-    var className = EVENT_MAP_INV[eventType];
+    const params = pars || {};
+    const className = EVENT_MAP_INV[eventType];
     if (!className) {
       throw new Error('Event type ' + eventType + ' not supported.');
     }
-    var evt = document.createEvent(className);
+    const evt = document.createEvent(className);
     switch (className) {
       case 'MouseEvents':
         {
-          var clientX = params.x || params.clientX || 0;
-          var clientY = params.y || params.clientY || 0;
+          const clientX = params.x || params.clientX || 0;
+          const clientY = params.y || params.clientY || 0;
           evt.initMouseEvent(eventType, params.bubbles || false, params.cancelable || true, window, params.clickCount || 1, 0,
           0,
           clientX,
@@ -813,7 +812,7 @@ var dom = {
         }
       case 'KeyboardEvents':
         {
-          var init = evt.initKeyboardEvent || evt.initKeyEvent;
+          const init = evt.initKeyboardEvent || evt.initKeyEvent;
           Common.defaults(params, {
             cancelable: true,
             ctrlKey: false,
@@ -836,7 +835,7 @@ var dom = {
     elem.dispatchEvent(evt);
   },
   bind: function bind(elem, event, func, newBool) {
-    var bool = newBool || false;
+    const bool = newBool || false;
     if (elem.addEventListener) {
       elem.addEventListener(event, func, bool);
     } else if (elem.attachEvent) {
@@ -845,7 +844,7 @@ var dom = {
     return dom;
   },
   unbind: function unbind(elem, event, func, newBool) {
-    var bool = newBool || false;
+    const bool = newBool || false;
     if (elem.removeEventListener) {
       elem.removeEventListener(event, func, bool);
     } else if (elem.detachEvent) {
@@ -857,7 +856,7 @@ var dom = {
     if (elem.className === undefined) {
       elem.className = className;
     } else if (elem.className !== className) {
-      var classes = elem.className.split(/ +/);
+      const classes = elem.className.split(/ +/);
       if (classes.indexOf(className) === -1) {
         classes.push(className);
         elem.className = classes.join(' ').replace(/^\s+/, '').replace(/\s+$/, '');
@@ -870,8 +869,8 @@ var dom = {
       if (elem.className === className) {
         elem.removeAttribute('class');
       } else {
-        var classes = elem.className.split(/ +/);
-        var index = classes.indexOf(className);
+        const classes = elem.className.split(/ +/);
+        const index = classes.indexOf(className);
         if (index !== -1) {
           classes.splice(index, 1);
           elem.className = classes.join(' ');
@@ -886,16 +885,16 @@ var dom = {
     return new RegExp('(?:^|\\s+)' + className + '(?:\\s+|$)').test(elem.className) || false;
   },
   getWidth: function getWidth(elem) {
-    var style = getComputedStyle(elem);
+    const style = getComputedStyle(elem);
     return cssValueToPixels(style['border-left-width']) + cssValueToPixels(style['border-right-width']) + cssValueToPixels(style['padding-left']) + cssValueToPixels(style['padding-right']) + cssValueToPixels(style.width);
   },
   getHeight: function getHeight(elem) {
-    var style = getComputedStyle(elem);
+    const style = getComputedStyle(elem);
     return cssValueToPixels(style['border-top-width']) + cssValueToPixels(style['border-bottom-width']) + cssValueToPixels(style['padding-top']) + cssValueToPixels(style['padding-bottom']) + cssValueToPixels(style.height);
   },
   getOffset: function getOffset(el) {
-    var elem = el;
-    var offset = { left: 0, top: 0 };
+    let elem = el;
+    const offset = { left: 0, top: 0 };
     if (elem.offsetParent) {
       do {
         offset.left += elem.offsetLeft;
@@ -910,12 +909,12 @@ var dom = {
   }
 };
 
-var BooleanController = function (_Controller) {
+const BooleanController = function (_Controller) {
   inherits(BooleanController, _Controller);
   function BooleanController(object, property) {
     classCallCheck(this, BooleanController);
-    var _this2 = possibleConstructorReturn(this, (BooleanController.__proto__ || Object.getPrototypeOf(BooleanController)).call(this, object, property));
-    var _this = _this2;
+    const _this2 = possibleConstructorReturn(this, (BooleanController.__proto__ || Object.getPrototypeOf(BooleanController)).call(this, object, property));
+    const _this = _this2;
     _this2.__prev = _this2.getValue();
     _this2.__checkbox = document.createElement('input');
     _this2.__checkbox.setAttribute('type', 'checkbox');
@@ -930,7 +929,7 @@ var BooleanController = function (_Controller) {
   createClass(BooleanController, [{
     key: 'setValue',
     value: function setValue(v) {
-      var toReturn = get(BooleanController.prototype.__proto__ || Object.getPrototypeOf(BooleanController.prototype), 'setValue', this).call(this, v);
+      const toReturn = get(BooleanController.prototype.__proto__ || Object.getPrototypeOf(BooleanController.prototype), 'setValue', this).call(this, v);
       if (this.__onFinishChange) {
         this.__onFinishChange.call(this, this.getValue());
       }
@@ -954,30 +953,30 @@ var BooleanController = function (_Controller) {
   return BooleanController;
 }(Controller);
 
-var OptionController = function (_Controller) {
+const OptionController = function (_Controller) {
   inherits(OptionController, _Controller);
   function OptionController(object, property, opts) {
     classCallCheck(this, OptionController);
-    var _this2 = possibleConstructorReturn(this, (OptionController.__proto__ || Object.getPrototypeOf(OptionController)).call(this, object, property));
-    var options = opts;
-    var _this = _this2;
+    const _this2 = possibleConstructorReturn(this, (OptionController.__proto__ || Object.getPrototypeOf(OptionController)).call(this, object, property));
+    let options = opts;
+    const _this = _this2;
     _this2.__select = document.createElement('select');
     if (Common.isArray(options)) {
-      var map = {};
+      const map = {};
       Common.each(options, function (element) {
         map[element] = element;
       });
       options = map;
     }
     Common.each(options, function (value, key) {
-      var opt = document.createElement('option');
+      const opt = document.createElement('option');
       opt.innerHTML = key;
       opt.setAttribute('value', value);
       _this.__select.appendChild(opt);
     });
     _this2.updateDisplay();
     dom.bind(_this2.__select, 'change', function () {
-      var desiredValue = this.options[this.selectedIndex].value;
+      const desiredValue = this.options[this.selectedIndex].value;
       _this.setValue(desiredValue);
     });
     _this2.domElement.appendChild(_this2.__select);
@@ -986,7 +985,7 @@ var OptionController = function (_Controller) {
   createClass(OptionController, [{
     key: 'setValue',
     value: function setValue(v) {
-      var toReturn = get(OptionController.prototype.__proto__ || Object.getPrototypeOf(OptionController.prototype), 'setValue', this).call(this, v);
+      const toReturn = get(OptionController.prototype.__proto__ || Object.getPrototypeOf(OptionController.prototype), 'setValue', this).call(this, v);
       if (this.__onFinishChange) {
         this.__onFinishChange.call(this, this.getValue());
       }
@@ -1003,12 +1002,12 @@ var OptionController = function (_Controller) {
   return OptionController;
 }(Controller);
 
-var StringController = function (_Controller) {
+const StringController = function (_Controller) {
   inherits(StringController, _Controller);
   function StringController(object, property) {
     classCallCheck(this, StringController);
-    var _this2 = possibleConstructorReturn(this, (StringController.__proto__ || Object.getPrototypeOf(StringController)).call(this, object, property));
-    var _this = _this2;
+    const _this2 = possibleConstructorReturn(this, (StringController.__proto__ || Object.getPrototypeOf(StringController)).call(this, object, property));
+    const _this = _this2;
     function onChange() {
       _this.setValue(_this.__input.value);
     }
@@ -1022,10 +1021,9 @@ var StringController = function (_Controller) {
     dom.bind(_this2.__input, 'keyup', onChange);
     dom.bind(_this2.__input, 'change', onChange);
     dom.bind(_this2.__input, 'blur', onBlur);
-    dom.bind(_this2.__input, 'keydown', function (e) {
-      if (e.keyCode === 13) {
-        this.blur();
-      }
+    dom.bind(_this2.__input, 'keydown', e => {
+      if (e.keyCode === 13)
+        this.blur()
     });
     _this2.updateDisplay();
     _this2.domElement.appendChild(_this2.__input);
@@ -1044,18 +1042,18 @@ var StringController = function (_Controller) {
 }(Controller);
 
 function numDecimals(x) {
-  var _x = x.toString();
+  const _x = x.toString();
   if (_x.indexOf('.') > -1) {
     return _x.length - _x.indexOf('.') - 1;
   }
   return 0;
 }
-var NumberController = function (_Controller) {
+const NumberController = function (_Controller) {
   inherits(NumberController, _Controller);
   function NumberController(object, property, params) {
     classCallCheck(this, NumberController);
-    var _this = possibleConstructorReturn(this, (NumberController.__proto__ || Object.getPrototypeOf(NumberController)).call(this, object, property));
-    var _params = params || {};
+    const _this = possibleConstructorReturn(this, (NumberController.__proto__ || Object.getPrototypeOf(NumberController)).call(this, object, property));
+    const _params = params || {};
     _this.__min = _params.min;
     _this.__max = _params.max;
     _this.__step = _params.step;
@@ -1074,7 +1072,7 @@ var NumberController = function (_Controller) {
   createClass(NumberController, [{
     key: 'setValue',
     value: function setValue(v) {
-      var _v = v;
+      let _v = v;
       if (this.__min !== undefined && _v < this.__min) {
         _v = this.__min;
       } else if (this.__max !== undefined && _v > this.__max) {
@@ -1110,19 +1108,19 @@ var NumberController = function (_Controller) {
 }(Controller);
 
 function roundToDecimal(value, decimals) {
-  var tenTo = Math.pow(10, decimals);
+  const tenTo = Math.pow(10, decimals);
   return Math.round(value * tenTo) / tenTo;
 }
-var NumberControllerBox = function (_NumberController) {
+const NumberControllerBox = function (_NumberController) {
   inherits(NumberControllerBox, _NumberController);
   function NumberControllerBox(object, property, params) {
     classCallCheck(this, NumberControllerBox);
-    var _this2 = possibleConstructorReturn(this, (NumberControllerBox.__proto__ || Object.getPrototypeOf(NumberControllerBox)).call(this, object, property, params));
+    const _this2 = possibleConstructorReturn(this, (NumberControllerBox.__proto__ || Object.getPrototypeOf(NumberControllerBox)).call(this, object, property, params));
     _this2.__truncationSuspended = false;
-    var _this = _this2;
-    var prevY = void 0;
+    const _this = _this2;
+    const prevY = void 0;
     function onChange() {
-      var attempted = parseFloat(_this.__input.value);
+      const attempted = parseFloat(_this.__input.value);
       if (!Common.isNaN(attempted)) {
         _this.setValue(attempted);
       }
@@ -1136,7 +1134,7 @@ var NumberControllerBox = function (_NumberController) {
       onFinish();
     }
     function onMouseDrag(e) {
-      var diff = prevY - e.clientY;
+      const diff = prevY - e.clientY;
       _this.setValue(_this.getValue() + diff * _this.__impliedStep);
       prevY = e.clientY;
     }
@@ -1180,12 +1178,12 @@ var NumberControllerBox = function (_NumberController) {
 function map(v, i1, i2, o1, o2) {
   return o1 + (o2 - o1) * ((v - i1) / (i2 - i1));
 }
-var NumberControllerSlider = function (_NumberController) {
+const NumberControllerSlider = function (_NumberController) {
   inherits(NumberControllerSlider, _NumberController);
   function NumberControllerSlider(object, property, min, max, step) {
     classCallCheck(this, NumberControllerSlider);
-    var _this2 = possibleConstructorReturn(this, (NumberControllerSlider.__proto__ || Object.getPrototypeOf(NumberControllerSlider)).call(this, object, property, { min: min, max: max, step: step }));
-    var _this = _this2;
+    const _this2 = possibleConstructorReturn(this, (NumberControllerSlider.__proto__ || Object.getPrototypeOf(NumberControllerSlider)).call(this, object, property, { min: min, max: max, step: step }));
+    const _this = _this2;
     _this2.__background = document.createElement('div');
     _this2.__foreground = document.createElement('div');
     dom.bind(_this2.__background, 'mousedown', onMouseDown);
@@ -1200,7 +1198,7 @@ var NumberControllerSlider = function (_NumberController) {
     }
     function onMouseDrag(e) {
       e.preventDefault();
-      var bgRect = _this.__background.getBoundingClientRect();
+      const bgRect = _this.__background.getBoundingClientRect();
       _this.setValue(map(e.clientX, bgRect.left, bgRect.right, _this.__min, _this.__max));
       return false;
     }
@@ -1220,8 +1218,8 @@ var NumberControllerSlider = function (_NumberController) {
       onTouchMove(e);
     }
     function onTouchMove(e) {
-      var clientX = e.touches[0].clientX;
-      var bgRect = _this.__background.getBoundingClientRect();
+      const clientX = e.touches[0].clientX;
+      const bgRect = _this.__background.getBoundingClientRect();
       _this.setValue(map(clientX, bgRect.left, bgRect.right, _this.__min, _this.__max));
     }
     function onTouchEnd() {
@@ -1239,7 +1237,7 @@ var NumberControllerSlider = function (_NumberController) {
   createClass(NumberControllerSlider, [{
     key: 'updateDisplay',
     value: function updateDisplay() {
-      var pct = (this.getValue() - this.__min) / (this.__max - this.__min);
+      const pct = (this.getValue() - this.__min) / (this.__max - this.__min);
       this.__foreground.style.width = pct * 100 + '%';
       return get(NumberControllerSlider.prototype.__proto__ || Object.getPrototypeOf(NumberControllerSlider.prototype), 'updateDisplay', this).call(this);
     }
@@ -1247,12 +1245,12 @@ var NumberControllerSlider = function (_NumberController) {
   return NumberControllerSlider;
 }(NumberController);
 
-var FunctionController = function (_Controller) {
+const FunctionController = function (_Controller) {
   inherits(FunctionController, _Controller);
   function FunctionController(object, property, text) {
     classCallCheck(this, FunctionController);
-    var _this2 = possibleConstructorReturn(this, (FunctionController.__proto__ || Object.getPrototypeOf(FunctionController)).call(this, object, property));
-    var _this = _this2;
+    const _this2 = possibleConstructorReturn(this, (FunctionController.__proto__ || Object.getPrototypeOf(FunctionController)).call(this, object, property));
+    const _this = _this2;
     _this2.__button = document.createElement('div');
     _this2.__button.innerHTML = text === undefined ? 'Fire' : text;
     dom.bind(_this2.__button, 'click', function (e) {
@@ -1279,14 +1277,14 @@ var FunctionController = function (_Controller) {
   return FunctionController;
 }(Controller);
 
-var ColorController = function (_Controller) {
+const ColorController = function (_Controller) {
   inherits(ColorController, _Controller);
   function ColorController(object, property) {
     classCallCheck(this, ColorController);
-    var _this2 = possibleConstructorReturn(this, (ColorController.__proto__ || Object.getPrototypeOf(ColorController)).call(this, object, property));
+    const _this2 = possibleConstructorReturn(this, (ColorController.__proto__ || Object.getPrototypeOf(ColorController)).call(this, object, property));
     _this2.__color = new Color(_this2.getValue());
     _this2.__temp = new Color(0);
-    var _this = _this2;
+    const _this = _this2;
     _this2.domElement = document.createElement('div');
     dom.makeSelectable(_this2.domElement, false);
     _this2.__selector = document.createElement('div');
@@ -1319,7 +1317,7 @@ var ColorController = function (_Controller) {
         dom.removeClass(_this.__selector, 'drag');
       });
     });
-    var valueField = document.createElement('div');
+    const valueField = document.createElement('div');
     Common.extend(_this2.__selector.style, {
       width: '122px',
       height: '102px',
@@ -1410,7 +1408,7 @@ var ColorController = function (_Controller) {
       onFinish();
     }
     function onBlur() {
-      var i = interpret(this.value);
+      const i = interpret(this.value);
       if (i !== false) {
         _this.__color.__state = i;
         _this.setValue(_this.__color.toOriginal());
@@ -1435,12 +1433,12 @@ var ColorController = function (_Controller) {
       if (e.type.indexOf('touch') === -1) {
         e.preventDefault();
       }
-      var fieldRect = _this.__saturation_field.getBoundingClientRect();
-      var _ref = e.touches && e.touches[0] || e,
+      const fieldRect = _this.__saturation_field.getBoundingClientRect();
+      const _ref = e.touches && e.touches[0] || e,
           clientX = _ref.clientX,
           clientY = _ref.clientY;
-      var s = (clientX - fieldRect.left) / (fieldRect.right - fieldRect.left);
-      var v = 1 - (clientY - fieldRect.top) / (fieldRect.bottom - fieldRect.top);
+      let s = (clientX - fieldRect.left) / (fieldRect.right - fieldRect.left);
+      let v = 1 - (clientY - fieldRect.top) / (fieldRect.bottom - fieldRect.top);
       if (v > 1) {
         v = 1;
       } else if (v < 0) {
@@ -1460,10 +1458,10 @@ var ColorController = function (_Controller) {
       if (e.type.indexOf('touch') === -1) {
         e.preventDefault();
       }
-      var fieldRect = _this.__hue_field.getBoundingClientRect();
-      var _ref2 = e.touches && e.touches[0] || e,
+      const fieldRect = _this.__hue_field.getBoundingClientRect();
+      const _ref2 = e.touches && e.touches[0] || e,
           clientY = _ref2.clientY;
-      var h = 1 - (clientY - fieldRect.top) / (fieldRect.bottom - fieldRect.top);
+      let h = 1 - (clientY - fieldRect.top) / (fieldRect.bottom - fieldRect.top);
       if (h > 1) {
         h = 1;
       } else if (h < 0) {
@@ -1478,9 +1476,9 @@ var ColorController = function (_Controller) {
   createClass(ColorController, [{
     key: 'updateDisplay',
     value: function updateDisplay() {
-      var i = interpret(this.getValue());
+      const i = interpret(this.getValue());
       if (i !== false) {
-        var mismatch = false;
+        let mismatch = false;
         Common.each(Color.COMPONENTS, function (component) {
           if (!Common.isUndefined(i[component]) && !Common.isUndefined(this.__color.__state[component]) && i[component] !== this.__color.__state[component]) {
             mismatch = true;
@@ -1493,8 +1491,8 @@ var ColorController = function (_Controller) {
       }
       Common.extend(this.__temp.__state, this.__color.__state);
       this.__temp.a = 1;
-      var flip = this.__color.v < 0.5 || this.__color.s > 0.5 ? 255 : 0;
-      var _flip = 255 - flip;
+      const flip = this.__color.v < 0.5 || this.__color.s > 0.5 ? 255 : 0;
+      const _flip = 255 - flip;
       Common.extend(this.__field_knob.style, {
         marginLeft: 100 * this.__color.s - 7 + 'px',
         marginTop: 100 * (1 - this.__color.v) - 7 + 'px',
@@ -1515,7 +1513,7 @@ var ColorController = function (_Controller) {
   }]);
   return ColorController;
 }(Controller);
-var vendors = ['-moz-', '-o-', '-webkit-', '-ms-', ''];
+const vendors = ['-moz-', '-o-', '-webkit-', '-ms-', ''];
 function linearGradient(elem, x, a, b) {
   elem.style.background = '';
   Common.each(vendors, function (vendor) {
@@ -1531,32 +1529,31 @@ function hueGradient(elem) {
   elem.style.cssText += 'background: linear-gradient(top,  #ff0000 0%,#ff00ff 17%,#0000ff 34%,#00ffff 50%,#00ff00 67%,#ffff00 84%,#ff0000 100%);';
 }
 
-var css = {
+const css = {
   load: function load(url, indoc) {
-    var doc = indoc || document;
-    var link = doc.createElement('link');
+    const doc = indoc || document;
+    const link = doc.createElement('link');
     link.type = 'text/css';
     link.rel = 'stylesheet';
     link.href = url;
     doc.getElementsByTagName('head')[0].appendChild(link);
   },
   inject: function inject(cssContent, indoc) {
-    var doc = indoc || document;
-    var injected = document.createElement('style');
+    const doc = indoc || document;
+    const injected = document.createElement('style');
     injected.type = 'text/css';
     injected.innerHTML = cssContent;
-    var head = doc.getElementsByTagName('head')[0];
+    const head = doc.getElementsByTagName('head')[0];
     try {
       head.appendChild(injected);
-    } catch (e) {
-    }
+    } catch (_e) { ; }
   }
 };
 
-var saveDialogContents = "<div id=\"dg-save\" class=\"dg dialogue\">\n\n  Here's the new load parameter for your <code>GUI</code>'s constructor:\n\n  <textarea id=\"dg-new-constructor\"></textarea>\n\n  <div id=\"dg-save-locally\">\n\n    <input id=\"dg-local-storage\" type=\"checkbox\"/> Automatically save\n    values to <code>localStorage</code> on exit.\n\n    <div id=\"dg-local-explain\">The values saved to <code>localStorage</code> will\n      override those passed to <code>dat.GUI</code>'s constructor. This makes it\n      easier to work incrementally, but <code>localStorage</code> is fragile,\n      and your friends may not see the same values you do.\n\n    </div>\n\n  </div>\n\n</div>";
+const saveDialogContents = "<div id=\"dg-save\" class=\"dg dialogue\">\n\n  Here's the new load parameter for your <code>GUI</code>'s constructor:\n\n  <textarea id=\"dg-new-constructor\"></textarea>\n\n  <div id=\"dg-save-locally\">\n\n    <input id=\"dg-local-storage\" type=\"checkbox\"/> Automatically save\n    values to <code>localStorage</code> on exit.\n\n    <div id=\"dg-local-explain\">The values saved to <code>localStorage</code> will\n      override those passed to <code>dat.GUI</code>'s constructor. This makes it\n      easier to work incrementally, but <code>localStorage</code> is fragile,\n      and your friends may not see the same values you do.\n\n    </div>\n\n  </div>\n\n</div>";
 
-var ControllerFactory = function ControllerFactory(object, property) {
-  var initialValue = object[property];
+const ControllerFactory = function ControllerFactory(object, property) {
+  const initialValue = object[property];
   if (Common.isArray(arguments[2]) || Common.isObject(arguments[2])) {
     return new OptionController(object, property, arguments[2]);
   }
@@ -1587,9 +1584,9 @@ var ControllerFactory = function ControllerFactory(object, property) {
 function requestAnimationFrame(callback) {
   setTimeout(callback, 1000 / 60);
 }
-var requestAnimationFrame$1 = window.requestAnimationFrame || window.webkitRequestAnimationFrame || window.mozRequestAnimationFrame || window.oRequestAnimationFrame || window.msRequestAnimationFrame || requestAnimationFrame;
+const requestAnimationFrame$1 = requestAnimationFrame || window.webkitRequestAnimationFrame || window.mozRequestAnimationFrame || window.oRequestAnimationFrame || window.msRequestAnimationFrame || requestAnimationFrame;
 
-var CenteredDiv = function () {
+const CenteredDiv = function () {
   function CenteredDiv() {
     classCallCheck(this, CenteredDiv);
     this.backgroundElement = document.createElement('div');
@@ -1616,36 +1613,33 @@ var CenteredDiv = function () {
     });
     document.body.appendChild(this.backgroundElement);
     document.body.appendChild(this.domElement);
-    var _this = this;
-    dom.bind(this.backgroundElement, 'click', function () {
-      _this.hide();
+    dom.bind(this.backgroundElement, 'click', () => {
+      this.hide();
     });
   }
   createClass(CenteredDiv, [{
     key: 'show',
     value: function show() {
-      var _this = this;
       this.backgroundElement.style.display = 'block';
       this.domElement.style.display = 'block';
       this.domElement.style.opacity = 0;
       this.domElement.style.webkitTransform = 'scale(1.1)';
       this.layout();
-      Common.defer(function () {
-        _this.backgroundElement.style.opacity = 1;
-        _this.domElement.style.opacity = 1;
-        _this.domElement.style.webkitTransform = 'scale(1)';
+      Common.defer(() => {
+        this.backgroundElement.style.opacity = 1;
+        this.domElement.style.opacity = 1;
+        this.domElement.style.webkitTransform = 'scale(1)';
       });
     }
   }, {
     key: 'hide',
     value: function hide() {
-      var _this = this;
-      var hide = function hide() {
-        _this.domElement.style.display = 'none';
-        _this.backgroundElement.style.display = 'none';
-        dom.unbind(_this.domElement, 'webkitTransitionEnd', hide);
-        dom.unbind(_this.domElement, 'transitionend', hide);
-        dom.unbind(_this.domElement, 'oTransitionEnd', hide);
+      const hide = hide = () => {
+        this.domElement.style.display = 'none';
+        this.backgroundElement.style.display = 'none';
+        dom.unbind(this.domElement, 'webkitTransitionEnd', hide);
+        dom.unbind(this.domElement, 'transitionend', hide);
+        dom.unbind(this.domElement, 'oTransitionEnd', hide);
       };
       dom.bind(this.domElement, 'webkitTransitionEnd', hide);
       dom.bind(this.domElement, 'transitionend', hide);
@@ -1664,28 +1658,27 @@ var CenteredDiv = function () {
   return CenteredDiv;
 }();
 
-var styleSheet = ___$insertStyle(".dg ul{list-style:none;margin:0;padding:0;width:100%;clear:both}.dg.ac{position:fixed;top:0;left:0;right:0;height:0;z-index:0}.dg:not(.ac) .main{overflow:hidden}.dg.main{-webkit-transition:opacity .1s linear;-o-transition:opacity .1s linear;-moz-transition:opacity .1s linear;transition:opacity .1s linear}.dg.main.taller-than-window{overflow-y:auto}.dg.main.taller-than-window .close-button{opacity:1;margin-top:-1px;border-top:1px solid #2c2c2c}.dg.main ul.closed .close-button{opacity:1 !important}.dg.main:hover .close-button,.dg.main .close-button.drag{opacity:1}.dg.main .close-button{-webkit-transition:opacity .1s linear;-o-transition:opacity .1s linear;-moz-transition:opacity .1s linear;transition:opacity .1s linear;border:0;line-height:19px;height:20px;cursor:pointer;text-align:center;background-color:#000}.dg.main .close-button.close-top{position:relative}.dg.main .close-button.close-bottom{position:absolute}.dg.main .close-button:hover{background-color:#111}.dg.a{float:right;margin-right:15px;overflow-y:visible}.dg.a.has-save>ul.close-top{margin-top:0}.dg.a.has-save>ul.close-bottom{margin-top:27px}.dg.a.has-save>ul.closed{margin-top:0}.dg.a .save-row{top:0;z-index:1002}.dg.a .save-row.close-top{position:relative}.dg.a .save-row.close-bottom{position:fixed}.dg li{-webkit-transition:height .1s ease-out;-o-transition:height .1s ease-out;-moz-transition:height .1s ease-out;transition:height .1s ease-out;-webkit-transition:overflow .1s linear;-o-transition:overflow .1s linear;-moz-transition:overflow .1s linear;transition:overflow .1s linear}.dg li:not(.folder){cursor:auto;height:27px;line-height:27px;padding:0 4px 0 5px}.dg li.folder{padding:0;border-left:4px solid rgba(0,0,0,0)}.dg li.title{cursor:pointer;margin-left:-4px}.dg .closed li:not(.title),.dg .closed ul li,.dg .closed ul li>*{height:0;overflow:hidden;border:0}.dg .cr{clear:both;padding-left:3px;height:27px;overflow:hidden}.dg .property-name{cursor:default;float:left;clear:left;width:40%;overflow:hidden;text-overflow:ellipsis}.dg .cr.function .property-name{width:100%}.dg .c{float:left;width:60%;position:relative}.dg .c input[type=text]{border:0;margin-top:4px;padding:3px;width:100%;float:right}.dg .has-slider input[type=text]{width:30%;margin-left:0}.dg .slider{float:left;width:66%;margin-left:-5px;margin-right:0;height:19px;margin-top:4px}.dg .slider-fg{height:100%}.dg .c input[type=checkbox]{margin-top:7px}.dg .c select{margin-top:5px}.dg .cr.function,.dg .cr.function .property-name,.dg .cr.function *,.dg .cr.boolean,.dg .cr.boolean *{cursor:pointer}.dg .cr.color{overflow:visible}.dg .selector{display:none;position:absolute;margin-left:-9px;margin-top:23px;z-index:10}.dg .c:hover .selector,.dg .selector.drag{display:block}.dg li.save-row{padding:0}.dg li.save-row .button{display:inline-block;padding:0px 6px}.dg.dialogue{background-color:#222;width:460px;padding:15px;font-size:13px;line-height:15px}#dg-new-constructor{padding:10px;color:#222;font-family:Monaco, monospace;font-size:10px;border:0;resize:none;box-shadow:inset 1px 1px 1px #888;word-wrap:break-word;margin:12px 0;display:block;width:440px;overflow-y:scroll;height:100px;position:relative}#dg-local-explain{display:none;font-size:11px;line-height:17px;border-radius:3px;background-color:#333;padding:8px;margin-top:10px}#dg-local-explain code{font-size:10px}#dat-gui-save-locally{display:none}.dg{color:#eee;font:11px 'Lucida Grande', sans-serif;text-shadow:0 -1px 0 #111}.dg.main::-webkit-scrollbar{width:5px;background:#1a1a1a}.dg.main::-webkit-scrollbar-corner{height:0;display:none}.dg.main::-webkit-scrollbar-thumb{border-radius:5px;background:#676767}.dg li:not(.folder){background:#1a1a1a;border-bottom:1px solid #2c2c2c}.dg li.save-row{line-height:25px;background:#dad5cb;border:0}.dg li.save-row select{margin-left:5px;width:108px}.dg li.save-row .button{margin-left:5px;margin-top:1px;border-radius:2px;font-size:9px;line-height:7px;padding:4px 4px 5px 4px;background:#c5bdad;color:#fff;text-shadow:0 1px 0 #b0a58f;box-shadow:0 -1px 0 #b0a58f;cursor:pointer}.dg li.save-row .button.gears{background:#c5bdad url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAsAAAANCAYAAAB/9ZQ7AAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAQJJREFUeNpiYKAU/P//PwGIC/ApCABiBSAW+I8AClAcgKxQ4T9hoMAEUrxx2QSGN6+egDX+/vWT4e7N82AMYoPAx/evwWoYoSYbACX2s7KxCxzcsezDh3evFoDEBYTEEqycggWAzA9AuUSQQgeYPa9fPv6/YWm/Acx5IPb7ty/fw+QZblw67vDs8R0YHyQhgObx+yAJkBqmG5dPPDh1aPOGR/eugW0G4vlIoTIfyFcA+QekhhHJhPdQxbiAIguMBTQZrPD7108M6roWYDFQiIAAv6Aow/1bFwXgis+f2LUAynwoIaNcz8XNx3Dl7MEJUDGQpx9gtQ8YCueB+D26OECAAQDadt7e46D42QAAAABJRU5ErkJggg==) 2px 1px no-repeat;height:7px;width:8px}.dg li.save-row .button:hover{background-color:#bab19e;box-shadow:0 -1px 0 #b0a58f}.dg li.folder{border-bottom:0}.dg li.title{padding-left:16px;background:#000 url(data:image/gif;base64,R0lGODlhBQAFAJEAAP////Pz8////////yH5BAEAAAIALAAAAAAFAAUAAAIIlI+hKgFxoCgAOw==) 6px 10px no-repeat;cursor:pointer;border-bottom:1px solid rgba(255,255,255,0.2)}.dg .closed li.title{background-image:url(data:image/gif;base64,R0lGODlhBQAFAJEAAP////Pz8////////yH5BAEAAAIALAAAAAAFAAUAAAIIlGIWqMCbWAEAOw==)}.dg .cr.boolean{border-left:3px solid #806787}.dg .cr.color{border-left:3px solid}.dg .cr.function{border-left:3px solid #e61d5f}.dg .cr.number{border-left:3px solid #2FA1D6}.dg .cr.number input[type=text]{color:#2FA1D6}.dg .cr.string{border-left:3px solid #1ed36f}.dg .cr.string input[type=text]{color:#1ed36f}.dg .cr.function:hover,.dg .cr.boolean:hover{background:#111}.dg .c input[type=text]{background:#303030;outline:none}.dg .c input[type=text]:hover{background:#3c3c3c}.dg .c input[type=text]:focus{background:#494949;color:#fff}.dg .c .slider{background:#303030;cursor:ew-resize}.dg .c .slider-fg{background:#2FA1D6;max-width:100%}.dg .c .slider:hover{background:#3c3c3c}.dg .c .slider:hover .slider-fg{background:#44abda}\n");
+const styleSheet = ___$insertStyle(".dg ul{list-style:none;margin:0;padding:0;width:100%;clear:both}.dg.ac{position:fixed;top:0;left:0;right:0;height:0;z-index:0}.dg:not(.ac) .main{overflow:hidden}.dg.main{-webkit-transition:opacity .1s linear;-o-transition:opacity .1s linear;-moz-transition:opacity .1s linear;transition:opacity .1s linear}.dg.main.taller-than-window{overflow-y:auto}.dg.main.taller-than-window .close-button{opacity:1;margin-top:-1px;border-top:1px solid #2c2c2c}.dg.main ul.closed .close-button{opacity:1 !important}.dg.main:hover .close-button,.dg.main .close-button.drag{opacity:1}.dg.main .close-button{-webkit-transition:opacity .1s linear;-o-transition:opacity .1s linear;-moz-transition:opacity .1s linear;transition:opacity .1s linear;border:0;line-height:19px;height:20px;cursor:pointer;text-align:center;background-color:#000}.dg.main .close-button.close-top{position:relative}.dg.main .close-button.close-bottom{position:absolute}.dg.main .close-button:hover{background-color:#111}.dg.a{float:right;margin-right:15px;overflow-y:visible}.dg.a.has-save>ul.close-top{margin-top:0}.dg.a.has-save>ul.close-bottom{margin-top:27px}.dg.a.has-save>ul.closed{margin-top:0}.dg.a .save-row{top:0;z-index:1002}.dg.a .save-row.close-top{position:relative}.dg.a .save-row.close-bottom{position:fixed}.dg li{-webkit-transition:height .1s ease-out;-o-transition:height .1s ease-out;-moz-transition:height .1s ease-out;transition:height .1s ease-out;-webkit-transition:overflow .1s linear;-o-transition:overflow .1s linear;-moz-transition:overflow .1s linear;transition:overflow .1s linear}.dg li:not(.folder){cursor:auto;height:27px;line-height:27px;padding:0 4px 0 5px}.dg li.folder{padding:0;border-left:4px solid rgba(0,0,0,0)}.dg li.title{cursor:pointer;margin-left:-4px}.dg .closed li:not(.title),.dg .closed ul li,.dg .closed ul li>*{height:0;overflow:hidden;border:0}.dg .cr{clear:both;padding-left:3px;height:27px;overflow:hidden}.dg .property-name{cursor:default;float:left;clear:left;width:40%;overflow:hidden;text-overflow:ellipsis}.dg .cr.function .property-name{width:100%}.dg .c{float:left;width:60%;position:relative}.dg .c input[type=text]{border:0;margin-top:4px;padding:3px;width:100%;float:right}.dg .has-slider input[type=text]{width:30%;margin-left:0}.dg .slider{float:left;width:66%;margin-left:-5px;margin-right:0;height:19px;margin-top:4px}.dg .slider-fg{height:100%}.dg .c input[type=checkbox]{margin-top:7px}.dg .c select{margin-top:5px}.dg .cr.function,.dg .cr.function .property-name,.dg .cr.function *,.dg .cr.boolean,.dg .cr.boolean *{cursor:pointer}.dg .cr.color{overflow:visible}.dg .selector{display:none;position:absolute;margin-left:-9px;margin-top:23px;z-index:10}.dg .c:hover .selector,.dg .selector.drag{display:block}.dg li.save-row{padding:0}.dg li.save-row .button{display:inline-block;padding:0px 6px}.dg.dialogue{background-color:#222;width:460px;padding:15px;font-size:13px;line-height:15px}#dg-new-constructor{padding:10px;color:#222;font-family:Monaco, monospace;font-size:10px;border:0;resize:none;box-shadow:inset 1px 1px 1px #888;word-wrap:break-word;margin:12px 0;display:block;width:440px;overflow-y:scroll;height:100px;position:relative}#dg-local-explain{display:none;font-size:11px;line-height:17px;border-radius:3px;background-color:#333;padding:8px;margin-top:10px}#dg-local-explain code{font-size:10px}#dat-gui-save-locally{display:none}.dg{color:#eee;font:11px 'Lucida Grande', sans-serif;text-shadow:0 -1px 0 #111}.dg.main::-webkit-scrollbar{width:5px;background:#1a1a1a}.dg.main::-webkit-scrollbar-corner{height:0;display:none}.dg.main::-webkit-scrollbar-thumb{border-radius:5px;background:#676767}.dg li:not(.folder){background:#1a1a1a;border-bottom:1px solid #2c2c2c}.dg li.save-row{line-height:25px;background:#dad5cb;border:0}.dg li.save-row select{margin-left:5px;width:108px}.dg li.save-row .button{margin-left:5px;margin-top:1px;border-radius:2px;font-size:9px;line-height:7px;padding:4px 4px 5px 4px;background:#c5bdad;color:#fff;text-shadow:0 1px 0 #b0a58f;box-shadow:0 -1px 0 #b0a58f;cursor:pointer}.dg li.save-row .button.gears{background:#c5bdad url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAsAAAANCAYAAAB/9ZQ7AAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAQJJREFUeNpiYKAU/P//PwGIC/ApCABiBSAW+I8AClAcgKxQ4T9hoMAEUrxx2QSGN6+egDX+/vWT4e7N82AMYoPAx/evwWoYoSYbACX2s7KxCxzcsezDh3evFoDEBYTEEqycggWAzA9AuUSQQgeYPa9fPv6/YWm/Acx5IPb7ty/fw+QZblw67vDs8R0YHyQhgObx+yAJkBqmG5dPPDh1aPOGR/eugW0G4vlIoTIfyFcA+QekhhHJhPdQxbiAIguMBTQZrPD7108M6roWYDFQiIAAv6Aow/1bFwXgis+f2LUAynwoIaNcz8XNx3Dl7MEJUDGQpx9gtQ8YCueB+D26OECAAQDadt7e46D42QAAAABJRU5ErkJggg==) 2px 1px no-repeat;height:7px;width:8px}.dg li.save-row .button:hover{background-color:#bab19e;box-shadow:0 -1px 0 #b0a58f}.dg li.folder{border-bottom:0}.dg li.title{padding-left:16px;background:#000 url(data:image/gif;base64,R0lGODlhBQAFAJEAAP////Pz8////////yH5BAEAAAIALAAAAAAFAAUAAAIIlI+hKgFxoCgAOw==) 6px 10px no-repeat;cursor:pointer;border-bottom:1px solid rgba(255,255,255,0.2)}.dg .closed li.title{background-image:url(data:image/gif;base64,R0lGODlhBQAFAJEAAP////Pz8////////yH5BAEAAAIALAAAAAAFAAUAAAIIlGIWqMCbWAEAOw==)}.dg .cr.boolean{border-left:3px solid #806787}.dg .cr.color{border-left:3px solid}.dg .cr.function{border-left:3px solid #e61d5f}.dg .cr.number{border-left:3px solid #2FA1D6}.dg .cr.number input[type=text]{color:#2FA1D6}.dg .cr.string{border-left:3px solid #1ed36f}.dg .cr.string input[type=text]{color:#1ed36f}.dg .cr.function:hover,.dg .cr.boolean:hover{background:#111}.dg .c input[type=text]{background:#303030;outline:none}.dg .c input[type=text]:hover{background:#3c3c3c}.dg .c input[type=text]:focus{background:#494949;color:#fff}.dg .c .slider{background:#303030;cursor:ew-resize}.dg .c .slider-fg{background:#2FA1D6;max-width:100%}.dg .c .slider:hover{background:#3c3c3c}.dg .c .slider:hover .slider-fg{background:#44abda}\n");
 
 css.inject(styleSheet);
-var CSS_NAMESPACE = 'dg';
-var HIDE_KEY_CODE = 72;
-var CLOSE_BUTTON_HEIGHT = 20;
-var DEFAULT_DEFAULT_PRESET_NAME = 'Default';
-var SUPPORTS_LOCAL_STORAGE = function () {
+const CSS_NAMESPACE = 'dg';
+const HIDE_KEY_CODE = 72;
+const CLOSE_BUTTON_HEIGHT = 20;
+const DEFAULT_DEFAULT_PRESET_NAME = 'Default';
+const SUPPORTS_LOCAL_STORAGE = function () {
   try {
-    return !!window.localStorage;
-  } catch (e) {
-    return false;
+    return !!window.localStorage
+  } catch (_e) {
+    return false
   }
 }();
-var SAVE_DIALOGUE = void 0;
-var autoPlaceVirgin = true;
-var autoPlaceContainer = void 0;
-var hide = false;
-var hideableGuis = [];
-var GUI = function GUI(pars) {
-  var _this = this;
-  var params = pars || {};
+let SAVE_DIALOGUE = void 0;
+let autoPlaceVirgin = true;
+let autoPlaceContainer = void 0;
+let hide = false;
+const hideableGuis = [];
+const GUI = function GUI(pars) {
+  let params = pars || {};
   this.domElement = document.createElement('div');
   this.__ul = document.createElement('ul');
   this.domElement.appendChild(this.__ul);
@@ -1718,9 +1711,9 @@ var GUI = function GUI(pars) {
   if (params.autoPlace && Common.isUndefined(params.scrollable)) {
     params.scrollable = true;
   }
-  var useLocalStorage = SUPPORTS_LOCAL_STORAGE && localStorage.getItem(getLocalStorageHash(this, 'isLocal')) === 'true';
-  var saveToLocalStorage = void 0;
-  var titleRow = void 0;
+  let useLocalStorage = SUPPORTS_LOCAL_STORAGE && localStorage.getItem(getLocalStorageHash(this, 'isLocal')) === 'true';
+  let saveToLocalStorage = void 0;
+  let titleRow = void 0;
   Object.defineProperties(this,
   {
     parent: {
@@ -1744,29 +1737,29 @@ var GUI = function GUI(pars) {
       }
     },
     preset: {
-      get: function get$$1() {
-        if (_this.parent) {
-          return _this.getRoot().preset;
+      get: () => {
+        if (this.parent) {
+          return this.getRoot().preset;
         }
         return params.load.preset;
       },
-      set: function set$$1(v) {
-        if (_this.parent) {
-          _this.getRoot().preset = v;
+      set: v => {
+        if (this.parent) {
+          this.getRoot().preset = v;
         } else {
           params.load.preset = v;
         }
         setPresetSelectIndex(this);
-        _this.revert();
+        this.revert();
       }
     },
     width: {
       get: function get$$1() {
         return params.width;
       },
-      set: function set$$1(v) {
+      set: v => {
         params.width = v;
-        setWidth(_this, v);
+        setWidth(this, v);
       }
     },
     name: {
@@ -1784,16 +1777,16 @@ var GUI = function GUI(pars) {
       get: function get$$1() {
         return params.closed;
       },
-      set: function set$$1(v) {
+      set: v => {
         params.closed = v;
         if (params.closed) {
-          dom.addClass(_this.__ul, GUI.CLASS_CLOSED);
+          dom.addClass(this.__ul, GUI.CLASS_CLOSED);
         } else {
-          dom.removeClass(_this.__ul, GUI.CLASS_CLOSED);
+          dom.removeClass(this.__ul, GUI.CLASS_CLOSED);
         }
         this.onResize();
-        if (_this.__closeButton) {
-          _this.__closeButton.innerHTML = v ? GUI.TEXT_OPEN : GUI.TEXT_CLOSED;
+        if (this.__closeButton) {
+          this.__closeButton.innerHTML = v ? GUI.TEXT_OPEN : GUI.TEXT_CLOSED;
         }
       }
     },
@@ -1806,7 +1799,7 @@ var GUI = function GUI(pars) {
       get: function get$$1() {
         return useLocalStorage;
       },
-      set: function set$$1(bool) {
+      set: bool  => {
         if (SUPPORTS_LOCAL_STORAGE) {
           useLocalStorage = bool;
           if (bool) {
@@ -1814,7 +1807,7 @@ var GUI = function GUI(pars) {
           } else {
             dom.unbind(window, 'unload', saveToLocalStorage);
           }
-          localStorage.setItem(getLocalStorageHash(_this, 'isLocal'), bool);
+          localStorage.setItem(getLocalStorageHash(this, 'isLocal'), bool);
         }
       }
     }
@@ -1825,8 +1818,8 @@ var GUI = function GUI(pars) {
     dom.makeSelectable(this.domElement, false);
     if (SUPPORTS_LOCAL_STORAGE) {
       if (useLocalStorage) {
-        _this.useLocalStorage = true;
-        var savedGui = localStorage.getItem(getLocalStorageHash(this, 'gui'));
+        this.useLocalStorage = true;
+        const savedGui = localStorage.getItem(getLocalStorageHash(this, 'gui'));
         if (savedGui) {
           params.load = JSON.parse(savedGui);
         }
@@ -1842,27 +1835,25 @@ var GUI = function GUI(pars) {
       dom.addClass(this.__closeButton, GUI.CLASS_CLOSE_BOTTOM);
       this.domElement.appendChild(this.__closeButton);
     }
-    dom.bind(this.__closeButton, 'click', function () {
-      _this.closed = !_this.closed;
+    dom.bind(this.__closeButton, 'click', () => {
+      this.closed = !this.closed;
     });
   } else {
     if (params.closed === undefined) {
       params.closed = true;
     }
-    var titleRowName = document.createTextNode(params.name);
+    const titleRowName = document.createTextNode(params.name);
     dom.addClass(titleRowName, 'controller-name');
-    titleRow = addRow(_this, titleRowName);
-    var onClickTitle = function onClickTitle(e) {
+    titleRow = addRow(this, titleRowName);
+    const onClickTitle = e => {
       e.preventDefault();
-      _this.closed = !_this.closed;
+      this.closed = !this.closed;
       return false;
     };
     dom.addClass(this.__ul, GUI.CLASS_CLOSED);
     dom.addClass(titleRow, 'title');
     dom.bind(titleRow, 'click', onClickTitle);
-    if (!params.closed) {
-      this.closed = false;
-    }
+    if (!params.closed) this.closed = false
   }
   if (params.autoPlace) {
     if (Common.isUndefined(params.parent)) {
@@ -1876,12 +1867,10 @@ var GUI = function GUI(pars) {
       autoPlaceContainer.appendChild(this.domElement);
       dom.addClass(this.domElement, GUI.CLASS_AUTO_PLACE);
     }
-    if (!this.parent) {
-      setWidth(_this, params.width);
-    }
+    if (!this.parent) setWidth(this, params.width)
   }
-  this.__resizeHandler = function () {
-    _this.onResizeDebounced();
+  this.__resizeHandler = () => {
+    this.onResizeDebounced()
   };
   dom.bind(window, 'resize', this.__resizeHandler);
   dom.bind(this.__ul, 'webkitTransitionEnd', this.__resizeHandler);
@@ -1897,8 +1886,8 @@ var GUI = function GUI(pars) {
     }
   };
   this.saveToLocalStorageIfPossible = saveToLocalStorage;
-  function resetWidth() {
-    var root = _this.getRoot();
+  const resetWidth = () => {
+    const root = this.getRoot();
     root.width += 1;
     Common.defer(function () {
       root.width -= 1;
@@ -1933,8 +1922,7 @@ GUI._keydownHandler = function (e) {
   }
 };
 dom.bind(window, 'keydown', GUI._keydownHandler, false);
-Common.extend(GUI.prototype,
-{
+Common.extend(GUI.prototype, {
   add: function add(object, property) {
     return _add(this, object, property, {
       factoryArgs: Array.prototype.slice.call(arguments, 2)
@@ -1948,10 +1936,7 @@ Common.extend(GUI.prototype,
   remove: function remove(controller) {
     this.__ul.removeChild(controller.__li);
     this.__controllers.splice(this.__controllers.indexOf(controller), 1);
-    var _this = this;
-    Common.defer(function () {
-      _this.onResize();
-    });
+    Common.defer(this.onResize);
   },
   destroy: function destroy() {
     if (this.parent) {
@@ -1960,10 +1945,7 @@ Common.extend(GUI.prototype,
     if (this.autoPlace) {
       autoPlaceContainer.removeChild(this.domElement);
     }
-    var _this = this;
-    Common.each(this.__folders, function (subfolder) {
-      _this.removeFolder(subfolder);
-    });
+    Common.each(this.__folders, this.removeFolder);
     dom.unbind(window, 'keydown', GUI._keydownHandler, false);
     removeListeners(this);
   },
@@ -1971,7 +1953,7 @@ Common.extend(GUI.prototype,
     if (this.__folders[name] !== undefined) {
       throw new Error('You already have a folder in this GUI by the' + ' name "' + name + '"');
     }
-    var newGuiParams = { name: name, parent: this };
+    const newGuiParams = { name: name, parent: this };
     newGuiParams.autoPlace = this.autoPlace;
     if (this.load &&
     this.load.folders &&
@@ -1979,9 +1961,9 @@ Common.extend(GUI.prototype,
       newGuiParams.closed = this.load.folders[name].closed;
       newGuiParams.load = this.load.folders[name];
     }
-    var gui = new GUI(newGuiParams);
+    const gui = new GUI(newGuiParams);
     this.__folders[name] = gui;
-    var li = addRow(this, gui.domElement);
+    const li = addRow(this, gui.domElement);
     dom.addClass(li, 'folder');
     return gui;
   },
@@ -1994,13 +1976,10 @@ Common.extend(GUI.prototype,
       delete this.load.folders[folder.name];
     }
     removeListeners(folder);
-    var _this = this;
     Common.each(folder.__folders, function (subfolder) {
       folder.removeFolder(subfolder);
     });
-    Common.defer(function () {
-      _this.onResize();
-    });
+    Common.defer(this.onResize);
   },
   open: function open() {
     this.closed = false;
@@ -2015,10 +1994,10 @@ Common.extend(GUI.prototype,
     this.domElement.style.display = '';
   },
   onResize: function onResize() {
-    var root = this.getRoot();
+    const root = this.getRoot();
     if (root.scrollable) {
-      var top = dom.getOffset(root.__ul).top;
-      var h = 0;
+      const top = dom.getOffset(root.__ul).top;
+      let h = 0;
       Common.each(root.__ul.childNodes, function (node) {
         if (!(root.autoPlace && node === root.__save_row)) {
           h += dom.getHeight(node);
@@ -2041,9 +2020,9 @@ Common.extend(GUI.prototype,
       root.__closeButton.style.width = root.width + 'px';
     }
   },
-  onResizeDebounced: Common.debounce(function () {
-    this.onResize();
-  }, 50),
+  onResizeDebounced: function () {
+    Common.debounce(this.onResize, 50)
+  },
   remember: function remember() {
     if (Common.isUndefined(SAVE_DIALOGUE)) {
       SAVE_DIALOGUE = new CenteredDiv();
@@ -2052,28 +2031,25 @@ Common.extend(GUI.prototype,
     if (this.parent) {
       throw new Error('You can only call remember on a top level GUI.');
     }
-    var _this = this;
-    Common.each(Array.prototype.slice.call(arguments), function (object) {
-      if (_this.__rememberedObjects.length === 0) {
-        addSaveMenu(_this);
-      }
-      if (_this.__rememberedObjects.indexOf(object) === -1) {
-        _this.__rememberedObjects.push(object);
-      }
-    });
-    if (this.autoPlace) {
-      setWidth(this, this.width);
-    }
+    Common.each(Array.prototype.slice.call(arguments), object => {
+      if (this.__rememberedObjects.length === 0)
+        addSaveMenu(this)
+      if (this.__rememberedObjects.indexOf(object) === -1)
+        this.__rememberedObjects.push(object)
+    })
+    if (this.autoPlace)
+      setWidth(this, this.width)
   },
   getRoot: function getRoot() {
-    var gui = this;
-    while (gui.parent) {
-      gui = gui.parent;
+    let parent = this.parent;
+    if (!parent) return this;
+    while (parent.parent) {
+      parent = parent.parent;
     }
-    return gui;
+    return parent;
   },
   getSaveObject: function getSaveObject() {
-    var toReturn = this.load;
+    const toReturn = this.load;
     toReturn.closed = this.closed;
     if (this.__rememberedObjects.length > 0) {
       toReturn.preset = this.preset;
@@ -2125,7 +2101,7 @@ Common.extend(GUI.prototype,
     }
   },
   listen: function listen(controller) {
-    var init = this.__listening.length === 0;
+    const init = this.__listening.length === 0;
     this.__listening.push(controller);
     if (init) {
       updateDisplays(this.__listening);
@@ -2141,7 +2117,7 @@ Common.extend(GUI.prototype,
   }
 });
 function addRow(gui, newDom, liBefore) {
-  var li = document.createElement('li');
+  const li = document.createElement('li');
   if (newDom) {
     li.appendChild(newDom);
   }
@@ -2160,7 +2136,7 @@ function removeListeners(gui) {
   }
 }
 function markPresetModified(gui, modified) {
-  var opt = gui.__preset_select[gui.__preset_select.selectedIndex];
+  const opt = gui.__preset_select[gui.__preset_select.selectedIndex];
   if (modified) {
     opt.innerHTML = opt.value + '*';
   } else {
@@ -2173,7 +2149,7 @@ function augmentController(gui, li, controller) {
   Common.extend(controller, {
     options: function options(_options) {
       if (arguments.length > 1) {
-        var nextSibling = controller.__li.nextElementSibling;
+        const nextSibling = controller.__li.nextElementSibling;
         controller.remove();
         return _add(gui, controller.object, controller.property, {
           before: nextSibling,
@@ -2181,7 +2157,7 @@ function augmentController(gui, li, controller) {
         });
       }
       if (Common.isArray(_options) || Common.isObject(_options)) {
-        var _nextSibling = controller.__li.nextElementSibling;
+        const _nextSibling = controller.__li.nextElementSibling;
         controller.remove();
         return _add(gui, controller.object, controller.property, {
           before: _nextSibling,
@@ -2203,12 +2179,12 @@ function augmentController(gui, li, controller) {
     }
   });
   if (controller instanceof NumberControllerSlider) {
-    var box = new NumberControllerBox(controller.object, controller.property, { min: controller.__min, max: controller.__max, step: controller.__step });
+    const box = new NumberControllerBox(controller.object, controller.property, { min: controller.__min, max: controller.__max, step: controller.__step });
     Common.each(['updateDisplay', 'onChange', 'onFinishChange', 'step', 'min', 'max'], function (method) {
-      var pc = controller[method];
-      var pb = box[method];
+      const pc = controller[method];
+      const pb = box[method];
       controller[method] = box[method] = function () {
-        var args = Array.prototype.slice.call(arguments);
+        const args = Array.prototype.slice.call(arguments);
         pb.apply(box, args);
         return pc.apply(controller, args);
       };
@@ -2216,12 +2192,12 @@ function augmentController(gui, li, controller) {
     dom.addClass(li, 'has-slider');
     controller.domElement.insertBefore(box.domElement, controller.domElement.firstElementChild);
   } else if (controller instanceof NumberControllerBox) {
-    var r = function r(returned) {
+    const r = function r(returned) {
       if (Common.isNumber(controller.__min) && Common.isNumber(controller.__max)) {
-        var oldName = controller.__li.firstElementChild.firstElementChild.innerHTML;
-        var wasListening = controller.__gui.__listening.indexOf(controller) > -1;
+        const oldName = controller.__li.firstElementChild.firstElementChild.innerHTML;
+        const wasListening = controller.__gui.__listening.indexOf(controller) > -1;
         controller.remove();
-        var newController = _add(gui, controller.object, controller.property, {
+        const newController = _add(gui, controller.object, controller.property, {
           before: controller.__li.nextElementSibling,
           factoryArgs: [controller.__min, controller.__max, controller.__step]
         });
@@ -2266,18 +2242,18 @@ function augmentController(gui, li, controller) {
   }, controller.setValue);
 }
 function recallSavedValue(gui, controller) {
-  var root = gui.getRoot();
-  var matchedIndex = root.__rememberedObjects.indexOf(controller.object);
+  const root = gui.getRoot();
+  const matchedIndex = root.__rememberedObjects.indexOf(controller.object);
   if (matchedIndex !== -1) {
-    var controllerMap = root.__rememberedObjectIndecesToControllers[matchedIndex];
+    const controllerMap = root.__rememberedObjectIndecesToControllers[matchedIndex];
     if (controllerMap === undefined) {
       controllerMap = {};
       root.__rememberedObjectIndecesToControllers[matchedIndex] = controllerMap;
     }
     controllerMap[controller.property] = controller;
     if (root.load && root.load.remembered) {
-      var presetMap = root.load.remembered;
-      var preset = void 0;
+      const presetMap = root.load.remembered;
+      let preset = void 0;
       if (presetMap[gui.preset]) {
         preset = presetMap[gui.preset];
       } else if (presetMap[DEFAULT_DEFAULT_PRESET_NAME]) {
@@ -2286,7 +2262,7 @@ function recallSavedValue(gui, controller) {
         return;
       }
       if (preset[matchedIndex] && preset[matchedIndex][controller.property] !== undefined) {
-        var value = preset[matchedIndex][controller.property];
+        const value = preset[matchedIndex][controller.property];
         controller.initialValue = value;
         controller.setValue(value);
       }
@@ -2297,11 +2273,11 @@ function _add(gui, object, property, params) {
   if (object[property] === undefined) {
     throw new Error('Object "' + object + '" has no property "' + property + '"');
   }
-  var controller = void 0;
+  let controller = void 0;
   if (params.color) {
     controller = new ColorController(object, property);
   } else {
-    var factoryArgs = [object, property].concat(params.factoryArgs);
+    const factoryArgs = [object, property].concat(params.factoryArgs);
     controller = ControllerFactory.apply(gui, factoryArgs);
   }
   if (params.before instanceof Controller) {
@@ -2309,13 +2285,13 @@ function _add(gui, object, property, params) {
   }
   recallSavedValue(gui, controller);
   dom.addClass(controller.domElement, 'c');
-  var name = document.createElement('span');
+  const name = document.createElement('span');
   dom.addClass(name, 'property-name');
   name.innerHTML = controller.property;
-  var container = document.createElement('div');
+  const container = document.createElement('div');
   container.appendChild(name);
   container.appendChild(controller.domElement);
-  var li = addRow(gui, container, params.before);
+  const li = addRow(gui, container, params.before);
   dom.addClass(li, GUI.CLASS_CONTROLLER_ROW);
   if (controller instanceof ColorController) {
     dom.addClass(li, 'color');
@@ -2326,11 +2302,11 @@ function _add(gui, object, property, params) {
   gui.__controllers.push(controller);
   return controller;
 }
-function getLocalStorageHash(gui, key) {
+function getLocalStorageHash(_gui, key) {
   return document.location.href + '.' + key;
 }
 function addPresetOption(gui, name, setSelected) {
-  var opt = document.createElement('option');
+  const opt = document.createElement('option');
   opt.innerHTML = name;
   opt.value = name;
   gui.__preset_select.appendChild(opt);
@@ -2342,35 +2318,35 @@ function showHideExplain(gui, explain) {
   explain.style.display = gui.useLocalStorage ? 'block' : 'none';
 }
 function addSaveMenu(gui) {
-  var div = gui.__save_row = document.createElement('li');
+  const div = gui.__save_row = document.createElement('li');
   dom.addClass(gui.domElement, 'has-save');
   gui.__ul.insertBefore(div, gui.__ul.firstChild);
   dom.addClass(div, 'save-row');
-  var gears = document.createElement('span');
+  const gears = document.createElement('span');
   gears.innerHTML = '&nbsp;';
   dom.addClass(gears, 'button gears');
-  var button = document.createElement('span');
+  const button = document.createElement('span');
   button.innerHTML = 'Save';
   dom.addClass(button, 'button');
   dom.addClass(button, 'save');
-  var button2 = document.createElement('span');
+  const button2 = document.createElement('span');
   button2.innerHTML = 'New';
   dom.addClass(button2, 'button');
   dom.addClass(button2, 'save-as');
-  var button3 = document.createElement('span');
+  const button3 = document.createElement('span');
   button3.innerHTML = 'Revert';
   dom.addClass(button3, 'button');
   dom.addClass(button3, 'revert');
-  var select = gui.__preset_select = document.createElement('select');
+  const select = gui.__preset_select = document.createElement('select');
   if (gui.load && gui.load.remembered) {
-    Common.each(gui.load.remembered, function (value, key) {
+    Common.each(gui.load.remembered, function (_value, key) {
       addPresetOption(gui, key, key === gui.preset);
     });
   } else {
     addPresetOption(gui, DEFAULT_DEFAULT_PRESET_NAME, false);
   }
   dom.bind(select, 'change', function () {
-    for (var index = 0; index < gui.__preset_select.length; index++) {
+    for (let index = 0; index < gui.__preset_select.length; index++) {
       gui.__preset_select[index].innerHTML = gui.__preset_select[index].value;
     }
     gui.preset = this.value;
@@ -2381,9 +2357,9 @@ function addSaveMenu(gui) {
   div.appendChild(button2);
   div.appendChild(button3);
   if (SUPPORTS_LOCAL_STORAGE) {
-    var explain = document.getElementById('dg-local-explain');
-    var localStorageCheckBox = document.getElementById('dg-local-storage');
-    var saveLocally = document.getElementById('dg-save-locally');
+    const explain = document.getElementById('dg-local-explain');
+    const localStorageCheckBox = document.getElementById('dg-local-storage');
+    const saveLocally = document.getElementById('dg-save-locally');
     saveLocally.style.display = 'block';
     if (localStorage.getItem(getLocalStorageHash(gui, 'isLocal')) === 'true') {
       localStorageCheckBox.setAttribute('checked', 'checked');
@@ -2394,7 +2370,7 @@ function addSaveMenu(gui) {
       showHideExplain(gui, explain);
     });
   }
-  var newConstructorTextArea = document.getElementById('dg-new-constructor');
+  const newConstructorTextArea = document.getElementById('dg-new-constructor');
   dom.bind(newConstructorTextArea, 'keydown', function (e) {
     if (e.metaKey && (e.which === 67 || e.keyCode === 67)) {
       SAVE_DIALOGUE.hide();
@@ -2410,7 +2386,7 @@ function addSaveMenu(gui) {
     gui.save();
   });
   dom.bind(button2, 'click', function () {
-    var presetName = prompt('Enter a new preset name.');
+    const presetName = prompt('Enter a new preset name.');
     if (presetName) {
       gui.saveAs(presetName);
     }
@@ -2420,7 +2396,7 @@ function addSaveMenu(gui) {
   });
 }
 function addResizeHandle(gui) {
-  var pmouseX = void 0;
+  let pmouseX = void 0;
   gui.__resize_handle = document.createElement('div');
   Common.extend(gui.__resize_handle.style, {
     width: '6px',
@@ -2463,10 +2439,10 @@ function setWidth(gui, w) {
   }
 }
 function getCurrentPreset(gui, useInitialValues) {
-  var toReturn = {};
-  Common.each(gui.__rememberedObjects, function (val, index) {
-    var savedValues = {};
-    var controllerMap = gui.__rememberedObjectIndecesToControllers[index];
+  const toReturn = {};
+  Common.each(gui.__rememberedObjects, function (_val, index) {
+    const savedValues = {};
+    const controllerMap = gui.__rememberedObjectIndecesToControllers[index];
     Common.each(controllerMap, function (controller, property) {
       savedValues[property] = useInitialValues ? controller.initialValue : controller.getValue();
     });
@@ -2475,7 +2451,7 @@ function getCurrentPreset(gui, useInitialValues) {
   return toReturn;
 }
 function setPresetSelectIndex(gui) {
-  for (var index = 0; index < gui.__preset_select.length; index++) {
+  for (let index = 0; index < gui.__preset_select.length; index++) {
     if (gui.__preset_select[index].value === gui.preset) {
       gui.__preset_select.selectedIndex = index;
     }
@@ -2492,12 +2468,12 @@ function updateDisplays(controllerArray) {
   });
 }
 
-var color = {
+const color = {
   Color: Color,
   math: ColorMath,
   interpret: interpret
 };
-var controllers = {
+const controllers = {
   Controller: Controller,
   BooleanController: BooleanController,
   OptionController: OptionController,
@@ -2508,10 +2484,10 @@ var controllers = {
   FunctionController: FunctionController,
   ColorController: ColorController
 };
-var dom$1 = { dom: dom };
-var gui = { GUI: GUI };
-var GUI$1 = GUI;
-var index = {
+const dom$1 = { dom: dom };
+const gui = { GUI: GUI };
+const GUI$1 = GUI;
+const index = {
   color: color,
   controllers: controllers,
   dom: dom$1,

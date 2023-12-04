@@ -1,6 +1,6 @@
 export default function Footer() {
 	return (
-    <div
+		<div
 			style={`
         width: 100%;
         height: 5rem;
@@ -10,8 +10,8 @@ export default function Footer() {
         margin-top: 5rem
       `}
 		>
-      <a href="https://github.com/mberehulka"> Github</a>
-      <a href="mailto:murielguedes@pm.me">󰇮 Contact</a>
+			<a class="inherit-color" href="https://github.com/mberehulka"> Github</a>
+			<a class="inherit-color" href="mailto:murielguedes@pm.me">󰇮 Contact</a>
 		</div>
 	)
 }

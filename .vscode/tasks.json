@@ -3,7 +3,7 @@
   "tasks": [
     {
       "label": "A",
-      "command": "Start-Process ./.vscode/start.sh",
+      "command": "deno run -A --watch=posts,src src/dev.ts",
       "type": "shell",
       "presentation": {
         "reveal": "silent",
@@ -22,6 +22,17 @@
         "panel": "shared",
         "close": true
       }
-    }
+    },
+    {
+      "label": "C",
+      "command": "deno run -A src/main.ts",
+      "type": "shell",
+      "presentation": {
+        "reveal": "silent",
+        "clear": true,
+        "panel": "shared",
+        "close": true
+      }
+    },
   ]
 }

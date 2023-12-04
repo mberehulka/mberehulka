@@ -30,7 +30,7 @@ export default function PostPage({ data: post }: PageProps<Post>) {
 					data-light-theme="light"
 					data-dark-theme="dark"
 					class="mt-8 markdown-body"
-					dangerouslySetInnerHTML={{ __html: render(post.body) }}
+					dangerouslySetInnerHTML={{ __html: post.body }}
 				/>
 			</div>
 		</>

@@ -10,7 +10,9 @@ export default function Header() {
 				padding-right: 2rem
       `}
 		>
-			<a href="/" class="text-1xl font-bold tracking-widest">Muriel Berehulka</a>
+			<a href="/" class="text-1xl font-bold tracking-widest">
+				Muriel Berehulka
+			</a>
 		</div>
 	)
 }

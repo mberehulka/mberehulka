@@ -14,3 +14,25 @@
   -webkit-font-smoothing : none !important;
   font-family: SymbolsNerdFont, Gohu !important
 }
+
+a:not(.font-bold, .inherit-color) {
+  color: #0cf !important
+}
+
+input {
+  background-color: transparent;
+  border-bottom: 1px solid gray
+}
+input[type="number"] {
+  width: 5rem
+}
+
+canvas.full-width {
+  width: 100%
+}
+.dg.ac {
+  position: absolute !important
+}
+.dg {
+  background-color: black !important
+}

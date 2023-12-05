@@ -1,14 +1,20 @@
 title: 3D Bresenham
 publishedAt: 2023-10-26
 snippet: 3D Bresenham algorithm with running example
-<!-- after-body-script: test.js -->
 ---
 
-<div class="horizontal">
-  <canvas id="ctx" class="full-width" height="400">test</canvas>
+<canvas id="ctx" class="full-width" height="400"></canvas>
+<script src="js/3d/bresenham/boilerplate.js" type="module"></script>
+
+```js
+---replace("js/3d/bresenham/algorithm.js")---
+```
+<div style="display: flex;justify-content: right">
+
+>[js/3d/bresenham/algorithm.js](js/3d/bresenham/algorithm.js)
+
 </div>
-<script src="js/3d/bresenham.js" type="module"></script>
 
-> Move camera with WASD and rotate with IJKL, or click and move mouse
+</br>
 
-Work in progress...
+> reference: [http://members.chello.at/easyfilter/bresenham.html](http://members.chello.at/easyfilter/bresenham.html)

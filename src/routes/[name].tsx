@@ -1,7 +1,7 @@
 import { Handlers, PageProps } from "$fresh/server.ts"
 import { Head } from "$x/fresh@1.5.2/runtime.ts"
 import Post from "../components/post.tsx"
-import { CSS, KATEX_CSS, render } from "$gfm"
+import { CSS, KATEX_CSS } from "$gfm"
 import "https://esm.sh/prismjs@1.29.0/components/prism-typescript?no-check"
 import "https://esm.sh/prismjs@1.29.0/components/prism-bash?no-check"
 import "https://esm.sh/prismjs@1.29.0/components/prism-rust?no-check"

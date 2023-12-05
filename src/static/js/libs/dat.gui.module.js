@@ -1118,7 +1118,7 @@ const NumberControllerBox = function (_NumberController) {
     const _this2 = possibleConstructorReturn(this, (NumberControllerBox.__proto__ || Object.getPrototypeOf(NumberControllerBox)).call(this, object, property, params));
     _this2.__truncationSuspended = false;
     const _this = _this2;
-    const prevY = void 0;
+    let prevY = void 0;
     function onChange() {
       const attempted = parseFloat(_this.__input.value);
       if (!Common.isNaN(attempted)) {

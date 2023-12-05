@@ -7,15 +7,13 @@ interface PostHeaders {
 	title: string
 	publishedAt: string
 	snippet: string
-	after_body_scripts: Array<string>
 }
 
 function format_headers(text: string): PostHeaders {
 	const res: PostHeaders = {
-		title: "Unknow",
-		publishedAt: "2023-01-01",
-		snippet: "---",
-		after_body_scripts: [],
+		title: "",
+		publishedAt: "",
+		snippet: ""
 	}
 	const lines = text.split("\n")
 	for (const line of lines) {
@@ -30,26 +28,28 @@ function format_headers(text: string): PostHeaders {
 			case "snippet":
 				res.snippet = value.trim()
 				break
-			case "after-body-script":
-				res.after_body_scripts.push(value.trim())
-				break
 		}
 	}
 	return res
 }
 
-function format_md(text: string) {
+async function format_md(text: string) {
 	const sep = text.search("---")
 	const headers = format_headers(text.slice(0, sep))
-	let body = render(text.slice(sep), {
+
+	let body_text = text.slice(sep)
+	
+	for (const occ of body_text.match(/(---replace\(").*?("\)---)/g) || []) {
+		const path = occ.slice("---replace(\"".length).slice(0, -"\")---".length)
+		const content = await Deno.readTextFile("src/static/" + path)
+		body_text = body_text.replace(occ, content)
+	}
+	
+	const body = render(body_text, {
 		allowIframes: true,
 		allowMath: true,
 		disableHtmlSanitization: true,
 	})
-
-	for (const src of headers.after_body_scripts) {
-		body += `<script src="js/${src}" type="module"></script>`
-	}
 
 	return { headers, body }
 }
@@ -96,7 +96,7 @@ export default class Post {
 		const text = await Deno.readTextFile(path)
 		const stats = await Deno.stat(path)
 		const last_change = stats.mtime || stats.birthtime
-		const { headers, body } = format_md(text)
+		const { headers, body } = await format_md(text)
 		return new Post(
 			name,
 			headers.title,

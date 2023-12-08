@@ -15,7 +15,7 @@
   font-family: SymbolsNerdFont, Gohu !important
 }
 
-a:not(.font-bold, .inherit-color) {
+a:not(.inherit-color) {
   color: #0cf !important
 }
 

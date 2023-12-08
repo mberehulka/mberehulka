@@ -1,7 +1,7 @@
 import * as _TRHEE from "../../libs/three.module.js"
 const { Vector3, Color, ...THREE } = _TRHEE
 import { scene, loop, gui, camera } from "../boilerplate.js"
-import bresenham_3d from "./algorithm.js"
+import start_end from "./algorithm.js"
 
 // Cube
 const cube_geo = new THREE.BoxGeometry(1, 1, 1)
@@ -25,6 +25,10 @@ const get_cube = pos => {
     Math.round(pos.y) + '' +
     Math.round(pos.x)
   ]
+}
+const show_cube = (x, y, z) => {
+  const cube = get_cube(new Vector3(x, y, z))
+  if (cube) cube.visible = true
 }
 const grid_loop = f => {
   for (let z = -grid_size/2; z <= grid_size/2; z++)
@@ -70,11 +74,25 @@ end_point_folder.open()
 gui.close()
 
 // Main loop
+const last_start_point = new Vector3().copy(-start_point)
+const last_end_point = new Vector3().copy(-end_point)
+function grid_needs_update() {
+  if (
+    start_point.distanceTo(last_start_point) <= 0 &&
+    end_point.distanceTo(last_end_point) <= 0
+  ) {
+    return false
+  } else {
+    last_start_point.copy(start_point)
+    last_end_point.copy(end_point)
+    return true
+  }
+}
 loop(_delta => {
+  if (!grid_needs_update()) return;
+  
   line_geo.setFromPoints([start_point, end_point])
   grid_loop(pos => get_cube(pos).visible = false)
-  bresenham_3d(...start_point, ...end_point, (x, y, z) => {
-    const cube = get_cube(new Vector3(x, y, z))
-    if (cube) cube.visible = true
-  })
+
+  start_end(... start_point, ...end_point, show_cube)
 })

@@ -10,9 +10,13 @@ Useful for ray-tracing and voxel rendering.
 <canvas id="ctx" class="full-width" height="400"></canvas>
 <script src="js/3d/vta/main.js" type="module"></script>
 
+<details>
+<summary>code</summary>
+
 ```js
 ---replace("js/3d/vta/algorithm.js")---
 ```
+</details>
 
 </br>
 

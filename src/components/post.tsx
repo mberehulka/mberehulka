@@ -23,7 +23,7 @@ function format_headers(text: string): PostHeaders {
 				res.title = value.trim()
 				break
 			case "publishedAt":
-				res.publishedAt = value.trim()
+				res.publishedAt = value.trim() + ":12:00"
 				break
 			case "snippet":
 				res.snippet = value.trim()
@@ -73,7 +73,7 @@ export default class Post {
 				{new Date(this.publishedAt).toLocaleDateString("en-us", {
 					year: "numeric",
 					month: "long",
-					day: "numeric",
+					day: "numeric"
 				})}
 			</p>
 		)

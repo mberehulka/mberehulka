@@ -19,7 +19,13 @@ const new_cube = pos => {
   scene.add(cube)
   cubes[pos.z + '' + pos.y + '' + pos.x] = cube
 }
-const get_cube = pos => { return cubes[pos.z + '' + pos.y + '' + pos.x] }
+const get_cube = pos => {
+  return cubes[
+    Math.round(pos.z) + '' +
+    Math.round(pos.y) + '' +
+    Math.round(pos.x)
+  ]
+}
 const grid_loop = f => {
   for (let z = -grid_size/2; z <= grid_size/2; z++)
     for (let y = -grid_size/2; y <= grid_size/2; y++)
@@ -34,11 +40,11 @@ const start_point = new Vector3( grid_size/2, -grid_size/2, -grid_size/2)
 const end_point   = new Vector3(-grid_size/2,  grid_size/3,  grid_size/2)
 const start_point_color = new Color(0x0000ff)
 const end_point_color   = new Color(0x00ff00)
-const line_mat = new THREE.LineDashedMaterial({
+const line_mat = new THREE.LineBasicMaterial({
   vertexColors: true,
-  scale: 4,
-  dashSize: 1,
-  gapSize: 1
+  // scale: 4,
+  // dashSize: 1,
+  // gapSize: 1
 })
 const line_geo = new THREE.BufferGeometry()
   .setFromPoints([start_point, end_point])
@@ -69,7 +75,6 @@ loop(_delta => {
   grid_loop(pos => get_cube(pos).visible = false)
   bresenham_3d(...start_point, ...end_point, (x, y, z) => {
     const cube = get_cube(new Vector3(x, y, z))
-    if (cube)
-        cube.visible = true
+    if (cube) cube.visible = true
   })
 })

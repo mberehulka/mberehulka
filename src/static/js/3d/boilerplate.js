@@ -40,7 +40,7 @@ export { scene }
 const camera = new THREE.PerspectiveCamera(75, canvas.width / canvas.height, 0.1, 100)
 const controls = new OrbitControls(camera, renderer.domElement)
 controls.enableDamping = true
-controls.minDistance = 10
+controls.minDistance = 1
 controls.maxDistance = 50
 export { camera, controls }
 

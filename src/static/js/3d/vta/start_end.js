@@ -12,10 +12,6 @@ export default function (x0, y0, z0, x1, y1, z1, draw) {
     let tx = hypotenuse * 0.5 / dx,
         ty = hypotenuse * 0.5 / dy,
         tz = hypotenuse * 0.5 / dz
-    console.log(dx, dy, dz)
-    console.log(hypotenuse)
-    console.log(t_delta_x, t_delta_y, t_delta_z)
-    console.log(tx, ty, tz)
     do {
         draw(x0, y0, z0)
         if (tx < ty) {

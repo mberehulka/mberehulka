@@ -1,7 +1,8 @@
 import * as _TRHEE from "../../libs/three.module.js"
 const { Vector3, Color, ...THREE } = _TRHEE
 import { scene, loop, gui, camera } from "../boilerplate.js"
-import start_end from "./algorithm.js"
+import start_end from "./start_end.js"
+import start_dir_dis from "./start_dir_dis.js"
 
 // Cube
 const cube_geo = new THREE.BoxGeometry(1, 1, 1)
@@ -94,5 +95,11 @@ loop(_delta => {
   line_geo.setFromPoints([start_point, end_point])
   grid_loop(pos => get_cube(pos).visible = false)
 
-  start_end(... start_point, ...end_point, show_cube)
+  // from start to end point
+  // start_end(...start_point, ...end_point, show_cube)
+
+  // from start point in direction until max distance
+  const direction = new Vector3().copy(end_point).sub(start_point).normalize()
+  const distance = new Vector3().copy(start_point).distanceTo(end_point)
+  start_dir_dis(...start_point, ...direction, distance, show_cube)
 })

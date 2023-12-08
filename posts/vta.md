@@ -11,10 +11,18 @@ Useful for ray-tracing and voxel rendering.
 <script src="js/3d/vta/main.js" type="module"></script>
 
 <details>
-<summary>code</summary>
+<summary>from start to end point</summary>
 
 ```js
----replace("js/3d/vta/algorithm.js")---
+---replace("js/3d/vta/start_end.js")---
+```
+</details>
+
+<details>
+<summary>from start in direction until max distance</summary>
+
+```js
+---replace("js/3d/vta/start_dir_dis.js")---
 ```
 </details>
 

@@ -1,14 +1,13 @@
-export default function (x, y, z, dx, dy, dz, mt, draw) {
+export default function (x, y, z, dx, dy, dz, max_dis, draw) {
     const sx = dx > 0 ? 1 : -1,
-          sy = dx > 0 ? 1 : -1,
-          sz = dx > 0 ? 1 : -1,
-          hypotenuse = Math.sqrt(dx * dx + dy * dy + dz * dz),
-          t_delta_x = hypotenuse / dx,
-          t_delta_y = hypotenuse / dy,
-          t_delta_z = hypotenuse / dz
-    let tx = hypotenuse * 0.5 / dx,
-        ty = hypotenuse * 0.5 / dy,
-        tz = hypotenuse * 0.5 / dz
+          sy = dy > 0 ? 1 : -1,
+          sz = dz > 0 ? 1 : -1,
+          t_delta_x = Math.abs(1 / dx),
+          t_delta_y = Math.abs(1 / dy),
+          t_delta_z = Math.abs(1 / dz)
+    let tx = Math.abs(0.5 / dx),
+        ty = Math.abs(0.5 / dy),
+        tz = Math.abs(0.5 / dz)
     do {
         draw(x, y, z)
         if (tx < ty) {
@@ -62,9 +61,9 @@ export default function (x, y, z, dx, dy, dz, mt, draw) {
             }
         }
     } while (
-        tx <= 1 ||
-        ty <= 1 ||
-        tz <= 1
+        tx <= max_dis ||
+        ty <= max_dis ||
+        tz <= max_dis
     )
     draw(x, y, z)
 }

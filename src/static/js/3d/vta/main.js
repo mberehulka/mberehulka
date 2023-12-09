@@ -1,7 +1,7 @@
 import * as _TRHEE from "../../libs/three.module.js"
 const { Vector3, Color, ...THREE } = _TRHEE
 import { scene, loop, gui, camera } from "../boilerplate.js"
-import start_end from "./start_end.js"
+// import start_end from "./start_end.js"
 import start_dir_dis from "./start_dir_dis.js"
 
 // Cube
@@ -45,12 +45,7 @@ const start_point = new Vector3( grid_size/2, -grid_size/2, -grid_size/2)
 const end_point   = new Vector3(-grid_size/2,  grid_size/3,  grid_size/2)
 const start_point_color = new Color(0x0000ff)
 const end_point_color   = new Color(0x00ff00)
-const line_mat = new THREE.LineBasicMaterial({
-  vertexColors: true,
-  // scale: 4,
-  // dashSize: 1,
-  // gapSize: 1
-})
+const line_mat = new THREE.LineBasicMaterial({ vertexColors: true })
 const line_geo = new THREE.BufferGeometry()
   .setFromPoints([start_point, end_point])
   .setAttribute("color", new THREE.Float32BufferAttribute([
@@ -93,8 +88,13 @@ loop(_delta => {
   if (!grid_needs_update()) return;
   
   line_geo.setFromPoints([start_point, end_point])
+  line.computeLineDistances()
+
+  // hide all cubes
   grid_loop(pos => get_cube(pos).visible = false)
 
+  // traverse cubes ↓
+  
   // from start to end point
   // start_end(...start_point, ...end_point, show_cube)
 

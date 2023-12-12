@@ -57,7 +57,7 @@ loop(_delta => {
   ) return;
   last_camera_rotation.copy(camera_rotation)
 
-  console.log("updating")
+  chunk.for_each((x, y, z) => chunk.get(x, y, z).material.opacity = 0.1)
 
   rays_loop((ray, rx, ry) => {
     // rx, ry => raster space, 0 < rx < width, 0 < ry < height

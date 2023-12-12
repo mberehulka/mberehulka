@@ -13,7 +13,7 @@ function format_headers(text: string): PostHeaders {
 	const res: PostHeaders = {
 		title: "",
 		publishedAt: "",
-		snippet: ""
+		snippet: "",
 	}
 	const lines = text.split("\n")
 	for (const line of lines) {
@@ -38,13 +38,13 @@ async function format_md(text: string) {
 	const headers = format_headers(text.slice(0, sep))
 
 	let body_text = text.slice(sep)
-	
+
 	for (const occ of body_text.match(/(---replace\(").*?("\)---)/g) || []) {
-		const path = occ.slice("---replace(\"".length).slice(0, -"\")---".length)
+		const path = occ.slice('---replace("'.length).slice(0, -'")---'.length)
 		const content = await Deno.readTextFile("src/static/" + path)
 		body_text = body_text.replace(occ, content)
 	}
-	
+
 	const body = render(body_text, {
 		allowIframes: true,
 		allowMath: true,
@@ -73,7 +73,7 @@ export default class Post {
 				{new Date(this.publishedAt).toLocaleDateString("en-us", {
 					year: "numeric",
 					month: "long",
-					day: "numeric"
+					day: "numeric",
 				})}
 			</p>
 		)
@@ -119,14 +119,11 @@ export default class Post {
 	}
 	render_card() {
 		return (
-			<div>
-				<a href={`/${this.name}`}>
-					{this.title_comp()}
-					{this.date_comp()}
-					<p class="mt-4 text-gray-200">{this.snippet}</p>
-				</a>
-				<Hr />
-			</div>
+			<a href={`/${this.name}`}>
+				{this.title_comp()}
+				{this.date_comp()}
+				<p class="mt-4 text-gray-200">{this.snippet}</p>
+			</a>
 		)
 	}
 	render_page_header() {

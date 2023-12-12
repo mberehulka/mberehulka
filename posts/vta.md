@@ -28,6 +28,6 @@ Useful for ray-tracing and voxel rendering.
 
 </br>
 
-- references:
+references:
   - <http://www.cs.yorku.ca/~amana/research/grid.pdf>
   - <https://stackoverflow.com/a/55277311>

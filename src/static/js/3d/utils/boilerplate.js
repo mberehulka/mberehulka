@@ -1,6 +1,6 @@
-import * as THREE from "../libs/three.module.js"
-import { GUI } from "../libs/dat.gui.module.js"
-import { OrbitControls } from "../libs/orbit_controls.js"
+import * as THREE from "../../libs/three.module.js"
+import { GUI } from "../../libs/dat.gui.module.js"
+import { OrbitControls } from "../../libs/orbit_controls.js"
 
 // Canvas
 const canvas = document.getElementById('ctx')
@@ -72,7 +72,21 @@ const frame_folder = gui.addFolder('Frame')
 frame_folder.add(frame, "fps_average").listen()
 frame_folder.add(frame, "ms_average").listen()
 frame_folder.open()
-export { gui }
+function gui_add_vector3(name, vec, min, max, step) {
+  const folder = gui.addFolder(name)
+  if (vec.x) {
+    folder.add(vec, 'x', min, max, step)
+    folder.add(vec, 'y', min, max, step)
+    folder.add(vec, 'z', min, max, step)
+  } else {
+    folder.add(vec, '_x', min, max, step)
+    folder.add(vec, '_y', min, max, step)
+    folder.add(vec, '_z', min, max, step)
+  }
+  folder.open()
+}
+gui.close()
+export { gui, gui_add_vector3 }
 
 // Resize
 window.onresize = _ => {

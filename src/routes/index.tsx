@@ -14,8 +14,14 @@ export default function Page(props: PageProps<Post[]>) {
 			<Head>
 			</Head>
 			<div>
-				<div class="flex flex-col gap-10 p-10">
-					{props.data.map((post) => post.render_card())}
+				<div class="flex flex-col pl-10 pr-10 pt-10">
+					{props.data.map(post =>
+						<div>
+							{post.render_card()}
+							<br></br>
+							<br></br>
+						</div>
+					)}
 				</div>
 			</div>
 		</>

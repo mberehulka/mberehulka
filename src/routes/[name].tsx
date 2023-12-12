@@ -23,7 +23,7 @@ export default function PostPage({ data: post }: PageProps<Post>) {
 				<title>{post.title}</title>
 				<style>{CSS}{KATEX_CSS}</style>
 			</Head>
-			<div class="m-10">
+			<div class="m-5">
 				{post.render_page_header()}
 				<article
 					data-color-mode="dark" // dark | light | auto

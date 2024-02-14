@@ -41,7 +41,7 @@ async function format_md(text: string) {
 
 	for (const occ of body_text.match(/(---replace\(").*?("\)---)/g) || []) {
 		const path = occ.slice('---replace("'.length).slice(0, -'")---'.length)
-		const content = await Deno.readTextFile("src/static/" + path)
+		const content = await Deno.readTextFile("public/" + path)
 		body_text = body_text.replace(occ, content)
 	}
 

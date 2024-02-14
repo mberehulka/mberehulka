@@ -1,6 +1,6 @@
 import * as _TRHEE from "../../libs/three.module.js"
 const { Vector3, Color, ...THREE } = _TRHEE
-import { gui_add_vector3, scene } from "../utils/boilerplate.js"
+import { gui_add_vector3, scene } from "./boilerplate.js"
 
 export default class Line {
   geometry = new THREE.BufferGeometry()
